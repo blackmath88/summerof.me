@@ -1,7 +1,3 @@
-name = "summer-of"
+name = "name-your-summer"
 compatibility_date = "2026-06-22"
 pages_build_output_dir = "dist"
-# KV namespace (you'll add the id after creating it in Session 3)
-# [[kv_namespaces]]
-# binding = "MANIFESTOS"
-# id = "..."
