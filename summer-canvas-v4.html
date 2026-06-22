@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Name Your Summer — v4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..900,30..100&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THEME VARIABLES
+============================================================ */
+:root{
+  --ink:#1a1814;
+  --ink-soft:#6c655c;
+  --line:#e8e0d0;
+  --paper:#fff;
+  --shadow-1:0 24px 60px rgba(26,24,20,.08);
+  --shadow-2:0 8px 24px rgba(26,24,20,.06);
+  --shadow-3:0 3px 12px rgba(26,24,20,.04);
+  --radius:24px;
+  --max-w:780px;
+}
+body[data-theme="a"]{
+  --bg-1:#fffcef; --bg-2:#f3edd5; --bg-3:#e2dab8; --paper-tint:#fffcef;
+  --color-a:#0b4f9c; --color-b:#ffd84d; --color-c:#ed3142;
+  --heat:#ed3142; --heat-soft:#fbd9dd; --ornament-stroke:#1a1814;
+  --gradient-hero:radial-gradient(circle at 75% 25%, rgba(255,216,77,.4) 0%, transparent 60%), #fffcef;
+}
+body[data-theme="c"]{
+  --bg-1:#fff8f0; --bg-2:#ffe9e5; --bg-3:#ffd1d8; --paper-tint:#fff8f0;
+  --color-a:#ff4d8d; --color-b:#00b8d4; --color-c:#ffc233;
+  --heat:#ff4d8d; --heat-soft:#ffd5e3; --ornament-stroke:#1a1814;
+  --gradient-hero:radial-gradient(circle at 75% 25%, rgba(255,77,141,.3) 0%, transparent 55%), #fff8f0;
+}
+body[data-theme="d"]{
+  --bg-1:#fdf6e3; --bg-2:#f0e6c8; --bg-3:#e2d4a8; --paper-tint:#fdf6e3;
+  --color-a:#1f4e3c; --color-b:#2c7a8c; --color-c:#c25a3d;
+  --heat:#c25a3d; --heat-soft:#f3dccf; --ornament-stroke:#1a1814;
+  --gradient-hero:radial-gradient(circle at 75% 25%, rgba(194,90,61,.25) 0%, transparent 55%), #fdf6e3;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background: radial-gradient(circle at top left, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+  background-attachment:fixed; min-height:100vh; color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif; font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; transition:background 600ms ease;
+}
+.serif{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;}
+main{max-width:var(--max-w);margin:0 auto;padding:20px 24px 120px;}
+
+/* ============================================================ NAV ============================================================ */
+.nav{
+  position:sticky;top:16px;z-index:1000;border-radius:999px;padding:10px 16px;
+  display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:36px;
+  background:rgba(255,255,255,.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.88);box-shadow:var(--shadow-2);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em;font-size:14px;}
+.brand-dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--color-a),var(--color-b),var(--color-c));}
+.nav-right{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-soft);}
+.theme-switcher{display:flex;gap:4px;}
+.theme-switcher .pill{width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all 180ms ease;}
+.theme-switcher .pill[data-pill="a"]{background:linear-gradient(135deg,#0b4f9c,#ffd84d,#ed3142);}
+.theme-switcher .pill[data-pill="c"]{background:linear-gradient(135deg,#ff4d8d,#00b8d4,#ffc233);}
+.theme-switcher .pill[data-pill="d"]{background:linear-gradient(135deg,#1f4e3c,#2c7a8c,#c25a3d);}
+.theme-switcher .pill:hover{transform:scale(1.15);}
+.theme-switcher .pill.active{border-color:var(--ink);transform:scale(1.1);}
+
+/* ============================================================ BUTTONS ============================================================ */
+.btn{
+  font-family:inherit;font-size:15px;font-weight:600;padding:14px 24px;
+  border-radius:999px;border:1.5px solid var(--ink);background:var(--ink);color:#fff;
+  cursor:pointer;letter-spacing:-.005em;transition:all 180ms ease;box-shadow:var(--shadow-3);
+}
+.btn:hover{background:var(--heat);border-color:var(--heat);transform:translateY(-1px);box-shadow:var(--shadow-2);}
+.btn.ghost{background:transparent;color:var(--ink);}
+.btn.ghost:hover{background:var(--ink);color:#fff;}
+.btn.warm{background:var(--heat);border-color:var(--heat);color:#fff;}
+.btn.warm:hover{filter:brightness(.92);}
+.btn-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:28px;}
+.btn-row .skip{font-size:13px;color:var(--ink-soft);cursor:pointer;padding:8px 12px;font-weight:500;}
+.btn-row .skip:hover{color:var(--ink);}
+
+/* ============================================================ LANDING ============================================================ */
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.18em;font-weight:700;color:var(--ink-soft);margin-bottom:18px;}
+.eyebrow .accent{color:var(--heat);}
+h1.hero-h{
+  font-family:'Fraunces',serif;font-weight:600;font-size:clamp(56px,11vw,104px);
+  line-height:.92;letter-spacing:-.04em;margin:0 0 28px 0;font-variation-settings:"opsz" 144,"SOFT" 80;
+}
+h1.hero-h em{font-style:italic;color:var(--heat);font-weight:500;font-variation-settings:"opsz" 144,"SOFT" 100;}
+.lead{font-size:19px;line-height:1.55;max-width:560px;margin:0 0 8px 0;color:var(--ink-soft);}
+
+.theme-picker{margin-top:48px;}
+.theme-picker .label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-bottom:14px;}
+.theme-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.theme-card{
+  padding:18px 16px;border-radius:var(--radius);background:rgba(255,255,255,.6);
+  backdrop-filter:blur(20px);border:2px solid transparent;cursor:pointer;transition:all 200ms ease;text-align:left;
+}
+.theme-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2);}
+.theme-card.active{border-color:var(--ink);background:#fff;}
+.theme-card .tc-name{font-family:'Fraunces',serif;font-weight:500;font-size:20px;line-height:1.05;margin:0 0 4px 0;letter-spacing:-.01em;font-variation-settings:"opsz" 36,"SOFT" 70;}
+.theme-card .tc-name em{font-style:italic;}
+.theme-card .tc-sub{font-size:11px;color:var(--ink-soft);margin:0 0 12px 0;line-height:1.4;}
+.theme-card .tc-preview{display:flex;justify-content:center;align-items:center;height:40px;}
+
+.hero-meta{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.meta-card{background:rgba(255,255,255,.55);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.7);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow-3);}
+.meta-card strong{display:block;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.meta-card p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.5;}
+
+/* ============================================================ FLOW ============================================================ */
+.progress{display:flex;gap:6px;margin-bottom:36px;}
+.progress .dot{flex:1;height:5px;border-radius:999px;background:rgba(255,255,255,.5);transition:all 240ms ease;}
+.progress .dot.done{background:var(--ink);}
+.progress .dot.active{background:var(--heat);}
+
+.step{display:none;}
+.step.active{display:block;animation:fadeIn 280ms ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+.step-card{background:var(--paper);border-radius:var(--radius);padding:40px 36px;box-shadow:var(--shadow-1);border:1px solid rgba(255,255,255,.9);}
+.step-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:16px;font-weight:700;}
+.step-label .accent{color:var(--heat);}
+.step h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(30px,5.5vw,44px);line-height:1.05;letter-spacing:-.025em;margin:0 0 18px 0;font-variation-settings:"opsz" 72,"SOFT" 60;}
+.step .why{font-size:15px;line-height:1.6;color:var(--ink-soft);margin:0 0 32px 0;max-width:540px;}
+.step .why em{font-style:normal;color:var(--ink);font-weight:500;}
+.step .why .ref{color:var(--heat);font-weight:500;}
+
+input[type="text"],textarea,input[type="date"]{
+  font-family:inherit;font-size:19px;line-height:1.4;width:100%;
+  padding:16px 20px;border:1.5px solid var(--line);background:var(--paper-tint);
+  color:var(--ink);border-radius:18px;outline:none;transition:all 180ms ease;
+}
+input[type="text"]:focus,textarea:focus,input[type="date"]:focus{border-color:var(--heat);background:#fff;box-shadow:0 0 0 4px var(--heat-soft);}
+textarea{min-height:120px;resize:vertical;font-size:17px;}
+::placeholder{color:#c8bda8;}
+
+.suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.chip{font-size:13px;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.5);cursor:pointer;color:var(--ink-soft);font-weight:500;transition:all 160ms ease;}
+.chip:hover{border-color:var(--heat);color:var(--heat);background:#fff;}
+
+.if-then-block{padding:20px;border-radius:18px;background:var(--paper-tint);border:1px solid var(--line);margin-bottom:14px;}
+.if-then-num{font-size:11px;color:var(--heat);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;}
+.if-then-row{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center;margin-bottom:10px;}
+.if-then-row:last-child{margin-bottom:0;}
+.if-then-label{font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--ink-soft);font-variation-settings:"opsz" 24;}
+.if-then-row input{font-size:16px;padding:12px 16px;}
+
+/* ============================================================ MANIFESTO ============================================================ */
+#manifesto{display:none;}
+.manifesto-frame{background:var(--paper);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-1);border:1px solid rgba(255,255,255,.9);}
+.manifesto-cover{padding:56px 44px 44px;background:var(--gradient-hero);border-bottom:1px solid var(--line);position:relative;}
+.manifesto-cover .top-row{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:40px;font-weight:600;}
+.manifesto-cover .theme-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin-bottom:20px;}
+.manifesto-cover .theme-tag .tag-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--color-a),var(--color-b),var(--color-c));}
+.manifesto-cover h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(56px,12vw,108px);line-height:.9;letter-spacing:-.045em;margin:0 0 12px 0;font-variation-settings:"opsz" 144,"SOFT" 100;}
+.manifesto-cover h1 .heat{color:var(--heat);font-style:italic;font-weight:500;}
+.manifesto-cover .subtitle{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:22px;line-height:1.45;color:var(--ink-soft);margin:24px 0 0 0;max-width:540px;font-variation-settings:"opsz" 36;}
+.manifesto-cover .hero-pict{position:absolute;top:40px;right:32px;width:140px;height:70px;opacity:.95;display:none;}
+@media(min-width:600px){.manifesto-cover .hero-pict{display:block;}}
+
+.manifesto-body{padding:44px 44px 24px;}
+.section-block{margin-bottom:40px;}
+.section-block:last-child{margin-bottom:0;}
+.section-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.section-label::before{content:"";display:block;width:24px;height:1.5px;background:var(--heat);border-radius:2px;}
+
+.plan-row{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);}
+.plan-row:last-child{border-bottom:none;}
+.plan-row .pict-wrap{background:var(--paper-tint);border-radius:14px;padding:8px;display:flex;align-items:center;justify-content:center;min-height:56px;}
+.plan-row .when{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--heat);font-weight:500;margin-bottom:2px;font-variation-settings:"opsz" 24;}
+.plan-row .what{font-size:17px;line-height:1.4;color:var(--ink);font-weight:500;}
+
+.anchor{display:flex;align-items:center;gap:24px;padding:28px;background:linear-gradient(135deg,var(--ink) 0%,#2e2820 100%);color:#fff;border-radius:18px;}
+.anchor .countdown{font-family:'Fraunces',serif;font-weight:500;font-size:68px;line-height:1;color:var(--color-b);font-variation-settings:"opsz" 144,"SOFT" 100;}
+.anchor .countdown-small{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;margin-top:6px;}
+.anchor .what-anchor{font-size:18px;line-height:1.45;font-weight:500;flex:1;}
+.anchor .anchor-date{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:8px;font-weight:600;}
+
+.hobby-quote{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:24px;line-height:1.35;font-variation-settings:"opsz" 48;color:var(--ink);margin:0;}
+.hobby-quote strong{font-style:normal;font-weight:600;color:var(--heat);}
+
+.obstacle-card{padding:24px;background:var(--heat-soft);border-radius:18px;}
+.obstacle-card .obstacle-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--heat);font-weight:700;margin-bottom:10px;}
+.obstacle-card .obstacle-text{font-size:16px;line-height:1.55;color:var(--ink);}
+.obstacle-card .obstacle-text strong{font-weight:600;}
+
+.pictogram-strip{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;padding:32px 0 8px;}
+.pictogram-strip .item{text-align:center;}
+.pictogram-strip .item-name{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:8px;font-weight:600;}
+
+.manifesto-footer{padding:24px 44px;background:var(--paper-tint);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
+
+/* ============================================================ SYSTEM SHOWCASE ============================================================ */
+.system-mini{margin-top:80px;padding:32px;border-radius:var(--radius);background:rgba(255,255,255,.55);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.7);}
+.system-mini h3{font-family:'Fraunces',serif;font-weight:500;font-size:24px;margin:0 0 6px 0;letter-spacing:-.015em;font-variation-settings:"opsz" 48;}
+.system-mini p{font-size:13px;color:var(--ink-soft);line-height:1.6;margin:0;max-width:560px;}
+.system-mini .full-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;}
+.system-mini .full-grid .item{text-align:center;padding:14px 8px;background:rgba(255,255,255,.5);border-radius:12px;}
+.system-mini .full-grid .lbl{font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--ink);margin-top:8px;font-variation-settings:"opsz" 24;}
+
+/* ============================================================ MEMPHIS PICTOGRAM STYLES ============================================================ */
+svg.picto .shape-a{fill:var(--color-a);}
+svg.picto .shape-b{fill:var(--color-b);}
+svg.picto .shape-c{fill:var(--color-c);}
+svg.picto .stroke-a{fill:none;stroke:var(--color-a);stroke-linecap:round;stroke-linejoin:round;}
+svg.picto .stroke-b{fill:none;stroke:var(--color-b);stroke-linecap:round;stroke-linejoin:round;}
+svg.picto .stroke-c{fill:none;stroke:var(--color-c);stroke-linecap:round;stroke-linejoin:round;}
+svg.picto .ornament{stroke:var(--ornament-stroke);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+svg.picto .ornament-dot{fill:var(--ornament-stroke);}
+svg.picto .ornament-line{stroke:var(--ornament-stroke);stroke-width:1.8;stroke-linecap:round;}
+
+@media(max-width:640px){
+  main{padding:16px 16px 100px;}
+  .nav{padding:8px 12px;}
+  .step-card{padding:28px 22px;}
+  .manifesto-cover{padding:40px 24px 32px;}
+  .manifesto-body{padding:30px 24px;}
+  .manifesto-footer{padding:18px 24px;flex-direction:column;gap:6px;}
+  .hero-meta{grid-template-columns:1fr;}
+  .theme-cards{grid-template-columns:1fr;}
+  .if-then-row{grid-template-columns:1fr;gap:6px;}
+  .anchor{flex-direction:column;align-items:flex-start;}
+  .anchor .countdown{font-size:52px;}
+  .nav-right .nav-date{display:none;}
+  .system-mini .full-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body data-theme="c">
+
+<main>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav">
+    <div class="brand"><span class="brand-dot"></span> Name Your Summer</div>
+    <div class="nav-right">
+      <div class="theme-switcher">
+        <div class="pill" data-pill="a" onclick="setTheme('a')" title="Mediterranean Noon"></div>
+        <div class="pill active" data-pill="c" onclick="setTheme('c')" title="Tropical Pop"></div>
+        <div class="pill" data-pill="d" onclick="setTheme('d')" title="Lake & Pine"></div>
+      </div>
+      <div class="nav-date" id="today-date">— · — · —</div>
+    </div>
+  </nav>
+
+  <!-- ============ LANDING ============ -->
+  <section id="screen-landing">
+    <div class="eyebrow">A six-minute ritual · One named summer · <span class="accent">Free, no account</span></div>
+    <h1 class="hero-h">Name your<br><em>summer.</em></h1>
+    <p class="lead">Most summers slip by because nobody named them. This is a guided ritual — six questions, one declarative manifesto, plans you'll actually keep. Built on three pieces of behavior science.</p>
+
+    <div class="theme-picker">
+      <div class="label">Pick a world →</div>
+      <div class="theme-cards" id="theme-cards">
+        <div class="theme-card" data-theme="a" onclick="setTheme('a')">
+          <h3 class="tc-name">Mediterranean <em>noon.</em></h3>
+          <p class="tc-sub">Cobalt, lemon, geranium. Greek-island confidence.</p>
+          <div class="tc-preview" id="preview-a"></div>
+        </div>
+        <div class="theme-card active" data-theme="c" onclick="setTheme('c')">
+          <h3 class="tc-name">Tropical <em>pop.</em></h3>
+          <p class="tc-sub">Hot pink, turquoise, sun. Memphis-Miami joy.</p>
+          <div class="tc-preview" id="preview-c"></div>
+        </div>
+        <div class="theme-card" data-theme="d" onclick="setTheme('d')">
+          <h3 class="tc-name">Lake & <em>pine.</em></h3>
+          <p class="tc-sub">Pine, lake teal, terracotta. Alpine grown-up.</p>
+          <div class="tc-preview" id="preview-d"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn warm" onclick="goToStep(1)">Begin the ritual →</button>
+      <span class="skip" onclick="document.getElementById('system-mini').scrollIntoView({behavior:'smooth'})">or see the pictograms first</span>
+    </div>
+
+    <div class="hero-meta">
+      <div class="meta-card"><strong>Today is a fresh start.</strong><p>Temporal landmarks separate your past self from your future one. Today, this hour, this is the line.</p></div>
+      <div class="meta-card"><strong>No photos, no scroll.</strong><p>This page does not host your media. It orchestrates intentions. Everything is geometry.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ FLOW ============ -->
+  <section id="flow" style="display:none;">
+    <div class="progress" id="progress-bar">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <div class="step-card">
+      <div class="step" data-step="1">
+        <div class="step-label">Step 1 of 6 · <span class="accent">Identity</span></div>
+        <h2>What's this summer going to be called?</h2>
+        <p class="why">Naming creates a mental boundary between your past self and your summer self. <em>"The summer of ___"</em> is a verbal commitment. <span class="ref">(Dai, Milkman & Riis, 2014.)</span></p>
+        <input type="text" id="input-name" placeholder="The summer of…" autocomplete="off" />
+        <div class="suggestions">
+          <span class="chip" onclick="setInput('input-name','The summer of speed')">The summer of speed</span>
+          <span class="chip" onclick="setInput('input-name','The summer of saying yes')">The summer of saying yes</span>
+          <span class="chip" onclick="setInput('input-name','The summer of the lake')">The summer of the lake</span>
+          <span class="chip" onclick="setInput('input-name','The summer of slow mornings')">The summer of slow mornings</span>
+        </div>
+        <div class="btn-row"><button class="btn" onclick="goToStep(2)">Next →</button></div>
+      </div>
+
+      <div class="step" data-step="2">
+        <div class="step-label">Step 2 of 6 · <span class="accent">Imagine forward</span></div>
+        <h2>It's late August. You're glowing. What do you tell a friend?</h2>
+        <p class="why">Picture sitting across from a friend in September. They ask how summer was. You light up. <em>Imagining future positive moments in sensory detail generates real positive emotion right now</em> — and increases enjoyment later. <span class="ref">(Bryant & Veroff, 2007.)</span></p>
+        <textarea id="input-wish" placeholder="I tell them about…"></textarea>
+        <div class="btn-row"><button class="btn ghost" onclick="goToStep(1)">← Back</button><button class="btn" onclick="goToStep(3)">Next →</button></div>
+      </div>
+
+      <div class="step" data-step="3">
+        <div class="step-label">Step 3 of 6 · <span class="accent">Get honest</span></div>
+        <h2>What's most likely to get in the way?</h2>
+        <p class="why">This is the step most goal-setting skips. <em>Positive fantasies alone predict worse outcomes</em> — you need to name the obstacle in the same breath as the wish. It's almost always internal. <span class="ref">(Oettingen.)</span></p>
+        <input type="text" id="input-obstacle" placeholder="Honestly, the thing is…" />
+        <div class="suggestions">
+          <span class="chip" onclick="setInput('input-obstacle','I get home tired and default to the couch')">Tired after work</span>
+          <span class="chip" onclick="setInput('input-obstacle','I wait for someone to invite me')">Waiting to be invited</span>
+          <span class="chip" onclick="setInput('input-obstacle','I overthink and don\'t text people')">Overthinking</span>
+          <span class="chip" onclick="setInput('input-obstacle','I just forget')">Forgetting</span>
+        </div>
+        <div class="btn-row"><button class="btn ghost" onclick="goToStep(2)">← Back</button><button class="btn" onclick="goToStep(4)">Next →</button></div>
+      </div>
+
+      <div class="step" data-step="4">
+        <div class="step-label">Step 4 of 6 · <span class="accent">Low-stakes start</span></div>
+        <h2>One thing you'll start now and quit on September 21.</h2>
+        <p class="why">A hobby with a built-in end date removes performance pressure. You're not getting back into chess — you're getting back into chess <em>for the summer</em>. Pre-committing to stop makes starting easy.</p>
+        <input type="text" id="input-hobby" placeholder="I'll get back into…" />
+        <div class="suggestions">
+          <span class="chip" onclick="setInput('input-hobby','playing chess')">chess</span>
+          <span class="chip" onclick="setInput('input-hobby','skateboarding')">skateboarding</span>
+          <span class="chip" onclick="setInput('input-hobby','playing guitar')">guitar</span>
+          <span class="chip" onclick="setInput('input-hobby','bouldering outside')">bouldering</span>
+          <span class="chip" onclick="setInput('input-hobby','swimming in the river')">river swimming</span>
+        </div>
+        <div class="btn-row"><button class="btn ghost" onclick="goToStep(3)">← Back</button><button class="btn" onclick="goToStep(5)">Next →</button></div>
+      </div>
+
+      <div class="step" data-step="5">
+        <div class="step-label">Step 5 of 6 · <span class="accent">The engine</span></div>
+        <h2>Three if-then plans. This is the part that works.</h2>
+        <p class="why">Meta-analysis of 94 studies: <em>if-then plans roughly double the rate of goal attainment</em> (d ≈ 0.65). The trigger has to be specific — a time, a place, a moment — not a feeling. <span class="ref">(Gollwitzer & Sheeran, 2006.)</span></p>
+        <div class="if-then-block">
+          <div class="if-then-num">Plan 1</div>
+          <div class="if-then-row"><div class="if-then-label">When</div><input type="text" id="input-trigger-1" placeholder="it's Wednesday after work…" /></div>
+          <div class="if-then-row"><div class="if-then-label">I will</div><input type="text" id="input-action-1" placeholder="text two friends and go to the park" /></div>
+        </div>
+        <div class="if-then-block">
+          <div class="if-then-num">Plan 2</div>
+          <div class="if-then-row"><div class="if-then-label">When</div><input type="text" id="input-trigger-2" placeholder="it's a sunny Saturday morning…" /></div>
+          <div class="if-then-row"><div class="if-then-label">I will</div><input type="text" id="input-action-2" placeholder="be on my bike by 9, no exceptions" /></div>
+        </div>
+        <div class="if-then-block">
+          <div class="if-then-num">Plan 3</div>
+          <div class="if-then-row"><div class="if-then-label">When</div><input type="text" id="input-trigger-3" placeholder="it rains on a weekend…" /></div>
+          <div class="if-then-row"><div class="if-then-label">I will</div><input type="text" id="input-action-3" placeholder="go to the bookshop, not Netflix" /></div>
+        </div>
+        <div class="btn-row"><button class="btn ghost" onclick="goToStep(4)">← Back</button><button class="btn" onclick="goToStep(6)">Next →</button></div>
+      </div>
+
+      <div class="step" data-step="6">
+        <div class="step-label">Step 6 of 6 · <span class="accent">Anchor</span></div>
+        <h2>One specific thing. One specific date.</h2>
+        <p class="why">Anticipation is a generator of present positive affect. Naming one dated event you already look forward to gives you something to mentally rehearse for the next 90 days. <em>("Train to Lisbon, July 14" beats "summer travel.")</em></p>
+        <input type="text" id="input-anchor-name" placeholder="The thing — e.g., 'Train to Lisbon with Sara'" style="margin-bottom:12px;" />
+        <input type="date" id="input-anchor-date" />
+        <div class="btn-row"><button class="btn ghost" onclick="goToStep(5)">← Back</button><button class="btn warm" onclick="generateManifesto()">Generate my manifesto →</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MANIFESTO ============ -->
+  <section id="manifesto">
+    <div class="step-label" style="margin-bottom:12px;">Your manifesto · <span class="accent">Memphis edition</span></div>
+    <div class="manifesto-frame" id="manifesto-render"></div>
+    <div class="btn-row" style="justify-content:center;">
+      <button class="btn ghost" onclick="restart()">↺ Start over</button>
+      <button class="btn" onclick="cycleTheme()">↻ Try another world</button>
+      <button class="btn warm" onclick="alert('In production: shareable URL with 30-day TTL on Cloudflare KV. Optional sign-on converts to a persistent canvas at /summer/[handle].')">Share link →</button>
+    </div>
+  </section>
+
+  <!-- ============ FULL PICTOGRAM SET ============ -->
+  <section class="system-mini" id="system-mini">
+    <h3 class="serif">The pictogram set.</h3>
+    <p>Twelve hand-crafted topical illustrations. Each uses your theme's three colors plus an ink ornament layer. Same vocabulary across the set: flat shapes, no gradients, no photos. Try switching themes (top right) to see all 12 recolor live.</p>
+    <div class="full-grid" id="full-grid"></div>
+  </section>
+
+</main>
+
+<script>
+// =======================================================================
+// THEME
+// =======================================================================
+function setTheme(theme) {
+  document.body.setAttribute('data-theme', theme);
+  document.querySelectorAll('.theme-switcher .pill').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.theme-switcher .pill[data-pill="${theme}"]`)?.classList.add('active');
+  document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.theme-card[data-theme="${theme}"]`)?.classList.add('active');
+  renderPreviews();
+  renderFullGrid();
+  if (document.getElementById('manifesto').style.display === 'block') generateManifesto();
+}
+function cycleTheme() {
+  const themes = ['a','c','d'];
+  const current = document.body.getAttribute('data-theme');
+  const next = themes[(themes.indexOf(current)+1) % themes.length];
+  setTheme(next);
+}
+
+// =======================================================================
+// State + flow
+// =======================================================================
+const state = { step:0, name:'', wish:'', obstacle:'', hobby:'', trigger1:'', action1:'', trigger2:'', action2:'', trigger3:'', action3:'', anchorName:'', anchorDate:'' };
+function setToday() {
+  document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-GB', { weekday:'long', month:'long', day:'numeric' });
+}
+setToday();
+function setInput(id, val) { document.getElementById(id).value = val; }
+function captureCurrentStep() {
+  ['name','wish','obstacle','hobby'].forEach(k => { const el = document.getElementById('input-' + k); if (el && el.value !== undefined) state[k] = el.value; });
+  for (let i = 1; i <= 3; i++) {
+    const t = document.getElementById('input-trigger-' + i); if (t && t.value !== undefined) state['trigger'+i] = t.value;
+    const a = document.getElementById('input-action-' + i); if (a && a.value !== undefined) state['action'+i] = a.value;
+  }
+  const an = document.getElementById('input-anchor-name'); if (an && an.value !== undefined) state.anchorName = an.value;
+  const ad = document.getElementById('input-anchor-date'); if (ad && ad.value !== undefined) state.anchorDate = ad.value;
+}
+function goToStep(n) {
+  captureCurrentStep();
+  document.getElementById('screen-landing').style.display = 'none';
+  document.getElementById('manifesto').style.display = 'none';
+  document.getElementById('flow').style.display = 'block';
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+  state.step = n; updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function updateProgress() {
+  document.querySelectorAll('#progress-bar .dot').forEach((d, i) => {
+    d.classList.remove('done','active'); if (i+1<state.step) d.classList.add('done'); if (i+1===state.step) d.classList.add('active');
+  });
+}
+function restart() {
+  Object.keys(state).forEach(k => state[k] = ''); state.step = 0;
+  document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+  document.getElementById('flow').style.display = 'none';
+  document.getElementById('manifesto').style.display = 'none';
+  document.getElementById('screen-landing').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// =======================================================================
+// TOPICAL PICTOGRAM REGISTRY (v4)
+// Each pictogram is a hand-crafted SVG, 80x40 viewBox.
+// Uses theme classes: shape-a/b/c (fills), stroke-a/b/c (strokes), ornament (ink).
+// =======================================================================
+const PICTOGRAMS = {
+  swim: { name:'Swim', svg:`
+    <circle class="shape-c" cx="68" cy="9" r="4"/>
+    <circle class="ornament-dot" cx="62" cy="4" r="0.9"/>
+    <circle class="ornament-dot" cx="74" cy="4" r="0.9"/>
+    <circle class="ornament-dot" cx="76" cy="13" r="0.9"/>
+    <rect class="shape-a" x="22" y="19" width="22" height="6" rx="3"/>
+    <circle class="shape-a" cx="46" cy="22" r="4"/>
+    <rect class="shape-a" x="50" y="20" width="7" height="3" rx="1.5"/>
+    <path class="stroke-b" d="M 4 32 Q 10 27 16 32 T 28 32 T 40 32 T 52 32 T 64 32 T 76 32" stroke-width="2.6"/>
+  `},
+  hike: { name:'Hike', svg:`
+    <circle class="shape-c" cx="68" cy="9" r="4"/>
+    <polygon class="shape-b" points="48,12 64,32 32,32"/>
+    <polygon class="shape-a" points="22,6 42,32 2,32"/>
+    <path class="ornament" d="M 16 13 L 22 6 L 27 13"/>
+    <circle class="ornament-dot" cx="50" cy="36" r="1"/>
+    <circle class="ornament-dot" cx="58" cy="37" r="1"/>
+    <circle class="ornament-dot" cx="66" cy="36" r="1"/>
+  `},
+  cookout: { name:'Cookout', svg:`
+    <path class="shape-c" d="M 30 16 C 28 11 30 7 34 4 C 36 9 40 12 38 18 C 36 21 32 21 30 16 Z"/>
+    <path class="shape-b" d="M 22 18 C 20 15 22 11 26 9 C 28 14 30 16 26 20 C 24 21 22 20 22 18 Z"/>
+    <rect class="shape-a" x="8" y="22" width="46" height="7" rx="2"/>
+    <line class="stroke-a" x1="14" y1="29" x2="14" y2="36" stroke-width="2.6"/>
+    <line class="stroke-a" x1="48" y1="29" x2="48" y2="36" stroke-width="2.6"/>
+    <circle class="ornament-dot" cx="62" cy="14" r="1.4"/>
+    <circle class="ornament-dot" cx="68" cy="10" r="1.4"/>
+    <circle class="ornament-dot" cx="72" cy="16" r="1.4"/>
+  `},
+  ride: { name:'Ride', svg:`
+    <circle class="stroke-a" cx="18" cy="28" r="8" stroke-width="3"/>
+    <circle class="stroke-a" cx="58" cy="28" r="8" stroke-width="3"/>
+    <polygon class="shape-b" points="20,28 38,12 56,28"/>
+    <circle class="shape-c" cx="38" cy="9" r="3"/>
+    <line class="ornament" x1="4" y1="22" x2="9" y2="22"/>
+    <line class="ornament" x1="2" y1="28" x2="7" y2="28"/>
+  `},
+  read: { name:'Read', svg:`
+    <path class="shape-a" d="M 8 10 L 38 11 L 38 32 L 8 31 Z"/>
+    <path class="shape-b" d="M 42 11 L 72 10 L 72 31 L 42 32 Z"/>
+    <line class="ornament" x1="40" y1="10" x2="40" y2="32" stroke-width="1.5"/>
+    <line class="ornament" x1="14" y1="17" x2="32" y2="17"/>
+    <line class="ornament" x1="14" y1="21" x2="28" y2="21"/>
+    <line class="ornament" x1="14" y1="25" x2="32" y2="25"/>
+    <line class="ornament" x1="46" y1="17" x2="64" y2="17"/>
+    <line class="ornament" x1="46" y1="21" x2="68" y2="21"/>
+    <line class="ornament" x1="46" y1="25" x2="62" y2="25"/>
+    <circle class="shape-c" cx="40" cy="5" r="2.2"/>
+  `},
+  listen: { name:'Listen', svg:`
+    <path class="stroke-a" d="M 14 22 C 14 6 60 6 60 22" stroke-width="3.5"/>
+    <rect class="shape-b" x="8" y="20" width="11" height="13" rx="3"/>
+    <rect class="shape-b" x="55" y="20" width="11" height="13" rx="3"/>
+    <path class="ornament" d="M 70 16 Q 73 22 70 28"/>
+    <path class="ornament" d="M 74 12 Q 79 22 74 32"/>
+    <circle class="shape-c" cx="37" cy="9" r="2.2"/>
+  `},
+  travel: { name:'Travel', svg:`
+    <polygon class="shape-a" points="4,30 62,8 62,22"/>
+    <polygon class="shape-b" points="4,30 36,20 62,22"/>
+    <line class="ornament" x1="2" y1="36" x2="8" y2="36"/>
+    <line class="ornament" x1="12" y1="36" x2="18" y2="36"/>
+    <line class="ornament" x1="22" y1="36" x2="28" y2="36"/>
+    <circle class="shape-c" cx="72" cy="9" r="3.5"/>
+  `},
+  gather: { name:'Gather', svg:`
+    <path class="shape-a" d="M 8 12 L 18 12 L 16 26 L 10 26 Z"/>
+    <line class="stroke-a" x1="13" y1="26" x2="13" y2="33" stroke-width="2"/>
+    <line class="stroke-a" x1="9" y1="34" x2="17" y2="34" stroke-width="2"/>
+    <path class="shape-b" d="M 30 12 L 40 12 L 38 26 L 32 26 Z"/>
+    <line class="stroke-b" x1="35" y1="26" x2="35" y2="33" stroke-width="2"/>
+    <line class="stroke-b" x1="31" y1="34" x2="39" y2="34" stroke-width="2"/>
+    <path class="shape-c" d="M 52 12 L 62 12 L 60 26 L 54 26 Z"/>
+    <line class="stroke-c" x1="57" y1="26" x2="57" y2="33" stroke-width="2"/>
+    <line class="stroke-c" x1="53" y1="34" x2="61" y2="34" stroke-width="2"/>
+    <line class="ornament" x1="10" y1="15" x2="16" y2="15"/>
+    <line class="ornament" x1="32" y1="15" x2="38" y2="15"/>
+    <line class="ornament" x1="54" y1="15" x2="60" y2="15"/>
+    <line class="ornament" x1="22" y1="6" x2="26" y2="9"/>
+    <line class="ornament" x1="44" y1="6" x2="48" y2="9"/>
+    <line class="ornament" x1="66" y1="6" x2="70" y2="9"/>
+  `},
+  make: { name:'Make', svg:`
+    <rect class="shape-b" x="6" y="18" width="34" height="4" rx="2"/>
+    <rect class="shape-c" x="40" y="14" width="5" height="12"/>
+    <polygon class="shape-a" points="45,10 62,6 62,34 45,30"/>
+    <circle class="shape-c" cx="70" cy="32" r="3.5"/>
+    <circle class="ornament-dot" cx="76" cy="34" r="1.2"/>
+    <circle class="ornament-dot" cx="66" cy="37" r="1.2"/>
+    <circle class="ornament-dot" cx="74" cy="28" r="1"/>
+  `},
+  watch: { name:'Watch', svg:`
+    <rect class="shape-a" x="8" y="8" width="64" height="22" rx="3"/>
+    <rect class="shape-b" x="12" y="12" width="56" height="14" rx="1.5"/>
+    <polygon class="shape-c" points="36,15 36,23 46,19"/>
+    <line class="ornament-line" x1="30" y1="34" x2="50" y2="34" stroke-width="2.4"/>
+    <line class="ornament-line" x1="36" y1="30" x2="36" y2="34"/>
+    <line class="ornament-line" x1="44" y1="30" x2="44" y2="34"/>
+  `},
+  rest: { name:'Rest', svg:`
+    <line class="stroke-a" x1="8" y1="6" x2="8" y2="34" stroke-width="3"/>
+    <line class="stroke-a" x1="72" y1="6" x2="72" y2="34" stroke-width="3"/>
+    <path class="stroke-b" d="M 8 14 Q 40 36 72 14" stroke-width="3"/>
+    <ellipse class="shape-c" cx="40" cy="24" rx="12" ry="3"/>
+    <circle class="ornament-dot" cx="22" cy="10" r="1"/>
+    <circle class="ornament-dot" cx="26" cy="7" r="1"/>
+    <circle class="ornament-dot" cx="30" cy="10" r="1"/>
+    <circle class="shape-c" cx="56" cy="8" r="2.5"/>
+  `},
+  sport: { name:'Sport', svg:`
+    <circle class="shape-a" cx="32" cy="9" r="4"/>
+    <path class="shape-a" d="M 28 13 L 36 13 L 38 26 L 30 26 Z"/>
+    <line class="stroke-b" x1="33" y1="16" x2="42" y2="22" stroke-width="3"/>
+    <line class="stroke-b" x1="31" y1="18" x2="22" y2="14" stroke-width="3"/>
+    <line class="stroke-c" x1="35" y1="26" x2="42" y2="36" stroke-width="3"/>
+    <line class="stroke-c" x1="30" y1="26" x2="22" y2="34" stroke-width="3"/>
+    <line class="ornament" x1="6" y1="14" x2="14" y2="14"/>
+    <line class="ornament" x1="8" y1="22" x2="18" y2="22"/>
+    <line class="ornament" x1="6" y1="30" x2="14" y2="30"/>
+  `}
+};
+
+// =======================================================================
+// RENDERER
+// =======================================================================
+function renderPicto(id, opts = {}) {
+  const p = PICTOGRAMS[id];
+  if (!p) return '';
+  const width = opts.width || 110;
+  const height = opts.height || 55;
+  return `<svg class="picto" width="${width}" height="${height}" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">${p.svg}</svg>`;
+}
+
+function guessPictogramId(text) {
+  const t = (text || '').toLowerCase();
+  if (/swim|pool|lake|river|beach|sea|ocean|water|wild swim/.test(t)) return 'swim';
+  if (/hike|walk|trail|mountain|climb|peak|forest/.test(t)) return 'hike';
+  if (/cook|barbecue|bbq|grill|dinner|picnic|eat|food|fire/.test(t)) return 'cookout';
+  if (/bike|cycle|ride|bicycle|skateboard|skate|scooter/.test(t)) return 'ride';
+  if (/read|book|library|bookshop|novel/.test(t)) return 'read';
+  if (/music|playlist|spotify|listen|concert|gig|dj|podcast/.test(t)) return 'listen';
+  if (/travel|trip|train|flight|fly|drive to|lisbon|paris|berlin|rome|airport/.test(t)) return 'travel';
+  if (/friend|gather|hang|meet|invite|people|text|party|drinks/.test(t)) return 'gather';
+  if (/build|make|craft|guitar|piano|chess|paint|draw|write|knit/.test(t)) return 'make';
+  if (/movie|film|cinema|show|watch|netflix|series|tv/.test(t)) return 'watch';
+  if (/run|gym|tennis|sport|boulder|workout|jog|climb|football/.test(t)) return 'sport';
+  if (/rest|sleep|nap|relax|hammock|chill|read in/.test(t)) return 'rest';
+  return 'gather';
+}
+
+// =======================================================================
+// LANDING PREVIEWS — render 'swim' in each theme
+// =======================================================================
+function renderPreviews() {
+  document.getElementById('preview-a').innerHTML = previewSwim('a');
+  document.getElementById('preview-c').innerHTML = previewSwim('c');
+  document.getElementById('preview-d').innerHTML = previewSwim('d');
+}
+function previewSwim(theme) {
+  const themeColors = {
+    a:{a:'#0b4f9c',b:'#ffd84d',c:'#ed3142'},
+    c:{a:'#ff4d8d',b:'#00b8d4',c:'#ffc233'},
+    d:{a:'#1f4e3c',b:'#2c7a8c',c:'#c25a3d'},
+  };
+  const col = themeColors[theme];
+  return `
+    <svg width="100" height="44" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+      <circle fill="${col.c}" cx="68" cy="9" r="4"/>
+      <circle fill="#1a1814" cx="62" cy="4" r="0.9"/>
+      <circle fill="#1a1814" cx="74" cy="4" r="0.9"/>
+      <rect fill="${col.a}" x="22" y="19" width="22" height="6" rx="3"/>
+      <circle fill="${col.a}" cx="46" cy="22" r="4"/>
+      <rect fill="${col.a}" x="50" y="20" width="7" height="3" rx="1.5"/>
+      <path stroke="${col.b}" stroke-width="2.6" fill="none" stroke-linecap="round" d="M 4 32 Q 10 27 16 32 T 28 32 T 40 32 T 52 32 T 64 32 T 76 32"/>
+    </svg>
+  `;
+}
+renderPreviews();
+
+// =======================================================================
+// FULL GRID — all 12 pictograms in a showcase
+// =======================================================================
+function renderFullGrid() {
+  const order = ['swim','hike','ride','cookout','gather','travel','read','listen','make','watch','sport','rest'];
+  const el = document.getElementById('full-grid');
+  el.innerHTML = order.map(id => `
+    <div class="item">
+      ${renderPicto(id, { width: 100, height: 50 })}
+      <div class="lbl">${PICTOGRAMS[id].name}</div>
+    </div>
+  `).join('');
+}
+renderFullGrid();
+
+// =======================================================================
+// MANIFESTO RENDERER
+// =======================================================================
+function generateManifesto() {
+  captureCurrentStep();
+  const summerName = state.name || 'The summer of intent';
+  const cleanName = summerName.replace(/^the summer of\s+/i, '');
+  const themeNames = { a:'Mediterranean Noon', c:'Tropical Pop', d:'Lake & Pine' };
+  const currentTheme = document.body.getAttribute('data-theme');
+
+  let countdownHTML = '';
+  if (state.anchorDate) {
+    const today = new Date(); const target = new Date(state.anchorDate);
+    const days = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+    if (days >= 0) {
+      const formatted = target.toLocaleDateString('en-GB', { day:'numeric', month:'long' });
+      countdownHTML = `<div class="section-block"><div class="section-label">The anchor</div><div class="anchor"><div><div class="countdown">${days}<span class="countdown-small">days until</span></div></div><div class="what-anchor">${state.anchorName || '—'}<div class="anchor-date">${formatted}</div></div></div></div>`;
+    }
+  }
+
+  const plans = [
+    { trigger:state.trigger1, action:state.action1 },
+    { trigger:state.trigger2, action:state.action2 },
+    { trigger:state.trigger3, action:state.action3 },
+  ].filter(p => p.trigger || p.action);
+
+  const planRows = plans.map(p => {
+    const pid = guessPictogramId(p.action);
+    return `<div class="plan-row">
+      <div class="pict-wrap">${renderPicto(pid, {width:96, height:48})}</div>
+      <div>
+        <div class="when">when ${p.trigger || '—'}</div>
+        <div class="what">I will ${p.action || '—'}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  let heroPictHTML = '';
+  if (plans.length || state.anchorName) {
+    const sourceText = state.anchorName || plans[0]?.action || 'gather';
+    const pid = guessPictogramId(sourceText);
+    heroPictHTML = `<div class="hero-pict">${renderPicto(pid, {width:140, height:70})}</div>`;
+  }
+
+  const todayFmt = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+
+  document.getElementById('manifesto-render').innerHTML = `
+    <div class="manifesto-cover">
+      ${heroPictHTML}
+      <div class="top-row"><span>Filed: ${todayFmt}</span><span>A manifesto · Edition 1</span></div>
+      <div class="theme-tag"><span class="tag-dot"></span>${themeNames[currentTheme]}</div>
+      <h1 class="serif">The summer<br>of <span class="heat">${cleanName}.</span></h1>
+      <p class="subtitle">${state.wish || 'A summer worth telling a friend about.'}</p>
+    </div>
+    <div class="manifesto-body">
+      ${plans.length ? `<div class="section-block"><div class="section-label">The plans · if · then</div>${planRows}</div>` : ''}
+      ${countdownHTML}
+      ${state.hobby ? `<div class="section-block"><div class="section-label">The hobby · quits 21 Sept</div><p class="hobby-quote">I'm getting back into <strong>${state.hobby}</strong>. Until the equinox. Then I stop.</p></div>` : ''}
+      ${state.obstacle ? `<div class="section-block"><div class="obstacle-card"><div class="obstacle-label">When the obstacle hits — and it will</div><div class="obstacle-text">The thing most likely to derail this: <strong>${state.obstacle}</strong>. Naming it is half the work. You have an if-then for that.</div></div></div>` : ''}
+      ${plans.length ? `<div class="section-block"><div class="section-label">The shape of it</div><div class="pictogram-strip">${plans.map(p => { const pid = guessPictogramId(p.action); return `<div class="item">${renderPicto(pid, {width:110, height:55})}<div class="item-name">${PICTOGRAMS[pid].name}</div></div>`; }).join('')}</div></div>` : ''}
+    </div>
+    <div class="manifesto-footer">
+      <span>Name your summer</span>
+      <span>${themeNames[currentTheme]}</span>
+    </div>
+  `;
+  document.getElementById('flow').style.display = 'none';
+  document.getElementById('manifesto').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
