@@ -1,8 +1,3 @@
-name = "name-your-summer"
+name = "summer-of"
 compatibility_date = "2026-06-22"
 pages_build_output_dir = "dist"
-
-# Created with: wrangler kv:namespace create MANIFESTOS
-[[kv_namespaces]]
-binding = "MANIFESTOS"
-id = "REPLACE_WITH_MANIFESTOS_NAMESPACE_ID"

@@ -1,4 +1,4 @@
-import { PICTOGRAMS, type PictogramId } from '../pictograms/registry'
+import { PICTOGRAMS, type PictogramId } from './registry'
 
 type PictogramProps = {
   id: PictogramId
@@ -19,4 +19,3 @@ export function Pictogram({ id, width = 110, height = 55 }: PictogramProps) {
     />
   )
 }
-

@@ -1,78 +1,23 @@
-import { Pictogram } from './Pictogram'
+import { JourneyOverview } from './JourneyBar'
+import { Pictogram } from '../pictograms/Pictogram'
 import { THEMES, type ThemeId } from '../lib/themes'
+import { PICTOGRAMS } from '../pictograms/registry'
 
-type LandingProps = {
-  theme: ThemeId
-  setTheme: (theme: ThemeId) => void
-  begin: () => void
+export function Landing({ theme, setTheme, begin, goToStep, loadDemo }: { theme: ThemeId; setTheme: (theme: ThemeId) => void; begin: () => void; goToStep: (step: number) => void; loadDemo: () => void }) {
+  return <section id="screen-landing">
+    <div className="eyebrow">A six-minute ritual · <span className="accent">Anonymous, no account</span></div>
+    <h1 className="hero-h">Name your<br /><em>summer.</em></h1>
+    <p className="lead"><strong>You only get so many summers.</strong> Most of them blur. The ones you remember had names — and the names came from doing things on purpose.</p>
+    <div className="btn-row"><button className="btn warm" type="button" onClick={begin}>Begin the ritual →</button><button className="btn ghost" type="button" onClick={loadDemo}>Show me an example</button></div>
+    <section className="pitch-section"><div className="pitch-eyebrow">The journey · six minutes</div><h2 className="pitch-h">Six steps. <em>Six models.</em></h2><p className="pitch-body" style={{ marginBottom: 8 }}>Each step is named for the psychology research it's built on. Nothing here is decorative.</p><JourneyOverview goToStep={goToStep} /></section>
+    <section className="pitch-section"><div className="pitch-eyebrow">What this is built on</div><h2 className="pitch-h">Three pieces of <em>real research.</em></h2><div className="science-grid"><div className="sci-card"><div className="sci-name">Implementation intentions</div><div className="sci-title">If-then plans roughly double success rate</div><div className="sci-detail"><strong>94 studies</strong>, d ≈ 0.65. Most-studied behavior-change intervention. <em>Gollwitzer & Sheeran, 2006.</em></div></div><div className="sci-card"><div className="sci-name">Mental contrasting</div><div className="sci-title">Pure positive thinking backfires</div><div className="sci-detail">Fantasy without obstacle predicts <strong>worse</strong> outcomes. 25 years of replications. <em>Oettingen, 2014.</em></div></div><div className="sci-card"><div className="sci-name">Anticipatory savoring</div><div className="sci-title">Looking forward is its own reward</div><div className="sci-detail">Vacations: <strong>two weeks before</strong> Greece beats the week in Greece. <em>Bryant & Veroff, 2007.</em></div></div></div></section>
+    <section className="preview-section"><div className="pitch-eyebrow">What you walk away with</div><h2 className="pitch-h">One manifesto. <em>Shareable.</em></h2><p className="pitch-body" style={{ marginBottom: 24 }}>A page with your name, your three if-then plans (illustrated), your anchor event with live countdown, and a quiet line about the obstacle you named — so when it hits, you've already decided what to do.</p><div className="preview-wrap"><div className="preview-cover"><div className="preview-hero-pict"><Pictogram id="travel" width={120} height={60} /></div><div className="top-mini"><span>Preview · Filed today</span><span>Manifesto · Edition 1</span></div><h2 className="serif">The summer<br />of <span className="heat">saying yes.</span></h2><p className="preview-subtitle">I'm telling Sara about the boat day with the Berlin friends, the night swim in the Aare, the morning I biked to work just because I wanted to.</p></div><div className="preview-body"><PreviewRow id="gather" when="when it's Wednesday after work" what="I will text two friends and propose dinner outside" /><PreviewRow id="ride" when="when it's a sunny Saturday morning" what="I will be on my bike by 9, no exceptions" /><PreviewRow id="read" when="when it rains on a weekend" what="I will go to the bookshop, not Netflix" /></div></div></section>
+    <div className="theme-picker"><div className="label">Pick a world to start in →</div><div className="theme-cards">{(['a','c','d'] as const).map((id) => <button key={id} className={`theme-card ${theme === id ? 'active' : ''}`} data-theme={id} onClick={() => setTheme(id)} type="button"><h3 className="tc-name">{id === 'a' ? <>Mediterranean <em>noon.</em></> : id === 'c' ? <>Tropical <em>pop.</em></> : <>Lake & <em>pine.</em></>}</h3><p className="tc-sub">{THEMES[id].sub}</p><div className="tc-preview"><Pictogram id="swim" width={100} height={44} /></div></button>)}</div></div>
+    <div className="picto-preload" aria-hidden="true">{Object.keys(PICTOGRAMS).map((id) => <Pictogram key={id} id={id as keyof typeof PICTOGRAMS} />)}</div>
+    <div className="btn-row"><button className="btn warm" type="button" onClick={begin}>Begin the ritual →</button><button className="btn ghost" type="button" onClick={loadDemo}>Show example summer</button></div>
+  </section>
 }
 
-export function Landing({ theme, setTheme, begin }: LandingProps) {
-  return (
-    <section id="screen-landing">
-      <div className="eyebrow">
-        A six-minute ritual · One named summer · <span className="accent">Free, no account</span>
-      </div>
-      <h1 className="hero-h">
-        Name your
-        <br />
-        <em>summer.</em>
-      </h1>
-      <p className="lead">
-        Most summers slip by because nobody named them. This is a guided ritual — six questions, one
-        declarative manifesto, plans you'll actually keep. Built on three pieces of behavior science.
-      </p>
-
-      <div className="theme-picker">
-        <div className="label">Pick a world →</div>
-        <div className="theme-cards">
-          {Object.entries(THEMES).map(([id, option]) => (
-            <button
-              key={id}
-              className={`theme-card ${theme === id ? 'active' : ''}`}
-              data-theme={id}
-              onClick={() => setTheme(id as ThemeId)}
-              type="button"
-            >
-              <h3 className="tc-name">{option.cardTitle}</h3>
-              <p className="tc-sub">{option.sub}</p>
-              <div className={`tc-preview theme-preview-${id}`}>
-                <Pictogram id="swim" width={100} height={44} />
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="btn-row">
-        <button className="btn warm" onClick={begin} type="button">
-          Begin the ritual →
-        </button>
-        <button
-          className="skip"
-          onClick={() => document.getElementById('system-mini')?.scrollIntoView({ behavior: 'smooth' })}
-          type="button"
-        >
-          or see the pictograms first
-        </button>
-      </div>
-
-      <div className="hero-meta">
-        <div className="meta-card">
-          <strong>Today is a fresh start.</strong>
-          <p>
-            Temporal landmarks separate your past self from your future one. Today, this hour, this is the
-            line.
-          </p>
-        </div>
-        <div className="meta-card">
-          <strong>No photos, no scroll.</strong>
-          <p>
-            This page does not host your media. It orchestrates intentions. Everything is geometry.
-          </p>
-        </div>
-      </div>
-    </section>
-  )
+function PreviewRow({ id, when, what }: { id: 'gather' | 'ride' | 'read'; when: string; what: string }) {
+  return <div className="preview-row"><div className="preview-pict"><Pictogram id={id} width={64} height={32} /></div><div><div className="preview-when">{when}</div><div className="preview-what">{what}</div></div></div>
 }
-
