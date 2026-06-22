@@ -3,6 +3,7 @@ import { Pictogram } from './Pictogram'
 import { THEMES, type ThemeId } from '../lib/themes'
 import { guessPictogramId } from '../pictograms/guess'
 import { PICTOGRAMS } from '../pictograms/registry'
+import type { SharePayload } from '../lib/share'
 import type { FlowState } from '../state'
 
 type ManifestoProps = {
@@ -28,6 +29,8 @@ export function Manifesto({ state, theme, restart, cycleTheme }: ManifestoProps)
   const [polishEnabled, setPolishEnabled] = useState(false)
   const [polished, setPolished] = useState<PolishedResult | null>(null)
   const [polishStatus, setPolishStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
+  const [shareStatus, setShareStatus] = useState<'idle' | 'saving' | 'ready' | 'error'>('idle')
+  const [shareUrl, setShareUrl] = useState('')
   const summerName = state.name || 'The summer of intent'
   const cleanName = summerName.replace(/^the summer of\s+/i, '')
   const rawPlans = useMemo(() => [
@@ -54,6 +57,8 @@ export function Manifesto({ state, theme, restart, cycleTheme }: ManifestoProps)
   }), [rawPlans, state])
   const activePolished = polishEnabled && polished?.key === polishKey ? polished.value : null
   const displayPlans = activePolished ? mergePlans(rawPlans, activePolished.plans) : rawPlans
+  const rawObstacleText = `The thing most likely to derail this: ${state.obstacle}. Naming it is half the work. You have an if-then for that.`
+  const rawHobbyLine = `I'm getting back into ${state.hobby}. Until the equinox. Then I stop.`
   const subtitle = activePolished?.subtitle
     ? activePolished.subtitle
     : state.wish || 'A summer worth telling a friend about.'
@@ -61,8 +66,8 @@ export function Manifesto({ state, theme, restart, cycleTheme }: ManifestoProps)
     ? activePolished.obstacle_framing
     : (
       <>
-        The thing most likely to derail this: <strong>{state.obstacle}</strong>. Naming it is half the work. You
-        have an if-then for that.
+        The thing most likely to derail this: <strong>{state.obstacle}</strong>. Naming it is half the work. You have
+        an if-then for that.
       </>
     )
   const hobbyText = activePolished?.hobby_line
@@ -77,6 +82,18 @@ export function Manifesto({ state, theme, restart, cycleTheme }: ManifestoProps)
     : null
   const todayFmt = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
   const anchor = getAnchor(state)
+  const sharePayload = useMemo<SharePayload>(() => ({
+    version: 1,
+    createdAt: new Date().toISOString(),
+    theme,
+    state,
+    copy: {
+      subtitle,
+      obstacleText: activePolished?.obstacle_framing || rawObstacleText,
+      hobbyLine: activePolished?.hobby_line || rawHobbyLine,
+      plans: displayPlans,
+    },
+  }), [activePolished, displayPlans, rawHobbyLine, rawObstacleText, state, subtitle, theme])
 
   function handlePolishToggle(enabled: boolean) {
     setPolishEnabled(enabled)
@@ -103,6 +120,31 @@ export function Manifesto({ state, theme, restart, cycleTheme }: ManifestoProps)
       })
       .catch(() => {
         setPolishStatus('error')
+      })
+  }
+
+  function handleShare() {
+    setShareStatus('saving')
+    setShareUrl('')
+
+    fetch('/api/save', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(sharePayload),
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error('Save request failed')
+        return response.json() as Promise<{ slug?: string }>
+      })
+      .then((data) => {
+        if (!data.slug) throw new Error('Missing slug')
+        const url = `${window.location.origin}/s/${data.slug}`
+        setShareUrl(url)
+        setShareStatus('ready')
+        void navigator.clipboard?.writeText(url)
+      })
+      .catch(() => {
+        setShareStatus('error')
       })
   }
 
@@ -233,7 +275,19 @@ export function Manifesto({ state, theme, restart, cycleTheme }: ManifestoProps)
         <button className="btn" onClick={cycleTheme} type="button">
           ↻ Try another world
         </button>
+        <button className="btn warm" onClick={handleShare} disabled={shareStatus === 'saving'} type="button">
+          {shareStatus === 'saving' ? 'Saving…' : 'Share link →'}
+        </button>
       </div>
+      {shareStatus === 'ready' ? (
+        <div className="share-result">
+          <span>Share URL copied:</span>
+          <a href={shareUrl}>{shareUrl}</a>
+        </div>
+      ) : null}
+      {shareStatus === 'error' ? (
+        <div className="share-result error">Could not save this manifesto. Check the KV binding and try again.</div>
+      ) : null}
     </section>
   )
 }
