@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Name Your Summer — v6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..900,30..100&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1814;--ink-soft:#6c655c;--ink-faint:#a8a092;--line:#e8e0d0;--paper:#fff;
+  --shadow-1:0 24px 60px rgba(26,24,20,.08);
+  --shadow-2:0 8px 24px rgba(26,24,20,.06);
+  --shadow-3:0 3px 12px rgba(26,24,20,.04);
+  --radius:24px;--max-w:820px;
+}
+body[data-theme="a"]{--bg-1:#fffcef;--bg-2:#f3edd5;--bg-3:#e2dab8;--paper-tint:#fffcef;--color-a:#0b4f9c;--color-b:#ffd84d;--color-c:#ed3142;--heat:#ed3142;--heat-soft:#fbd9dd;--ornament-stroke:#1a1814;--gradient-hero:radial-gradient(circle at 75% 25%,rgba(255,216,77,.4) 0%,transparent 60%),#fffcef;}
+body[data-theme="c"]{--bg-1:#fff8f0;--bg-2:#ffe9e5;--bg-3:#ffd1d8;--paper-tint:#fff8f0;--color-a:#ff4d8d;--color-b:#00b8d4;--color-c:#ffc233;--heat:#ff4d8d;--heat-soft:#ffd5e3;--ornament-stroke:#1a1814;--gradient-hero:radial-gradient(circle at 75% 25%,rgba(255,77,141,.3) 0%,transparent 55%),#fff8f0;}
+body[data-theme="d"]{--bg-1:#fdf6e3;--bg-2:#f0e6c8;--bg-3:#e2d4a8;--paper-tint:#fdf6e3;--color-a:#1f4e3c;--color-b:#2c7a8c;--color-c:#c25a3d;--heat:#c25a3d;--heat-soft:#f3dccf;--ornament-stroke:#1a1814;--gradient-hero:radial-gradient(circle at 75% 25%,rgba(194,90,61,.25) 0%,transparent 55%),#fdf6e3;}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:radial-gradient(circle at top left,var(--bg-1) 0%,var(--bg-2) 50%,var(--bg-3) 100%);background-attachment:fixed;min-height:100vh;color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;transition:background 600ms ease;}
+.serif{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;}
+main{max-width:var(--max-w);margin:0 auto;padding:20px 24px 120px;}
+
+/* ====== NAV ====== */
+.nav{position:sticky;top:16px;z-index:1000;border-radius:999px;padding:10px 16px;display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:36px;background:rgba(255,255,255,.72);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.88);box-shadow:var(--shadow-2);}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em;font-size:14px;}
+.brand-dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--color-a),var(--color-b),var(--color-c));}
+.nav-right{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-soft);}
+.theme-switcher{display:flex;gap:4px;}
+.theme-switcher .pill{width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all 180ms ease;}
+.theme-switcher .pill[data-pill="a"]{background:linear-gradient(135deg,#0b4f9c,#ffd84d,#ed3142);}
+.theme-switcher .pill[data-pill="c"]{background:linear-gradient(135deg,#ff4d8d,#00b8d4,#ffc233);}
+.theme-switcher .pill[data-pill="d"]{background:linear-gradient(135deg,#1f4e3c,#2c7a8c,#c25a3d);}
+.theme-switcher .pill:hover{transform:scale(1.15);}
+.theme-switcher .pill.active{border-color:var(--ink);transform:scale(1.1);}
+
+/* ====== BUTTONS ====== */
+.btn{font-family:inherit;font-size:15px;font-weight:600;padding:14px 24px;border-radius:999px;border:1.5px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;letter-spacing:-.005em;transition:all 180ms ease;box-shadow:var(--shadow-3);}
+.btn:hover{background:var(--heat);border-color:var(--heat);transform:translateY(-1px);box-shadow:var(--shadow-2);}
+.btn.ghost{background:transparent;color:var(--ink);}
+.btn.ghost:hover{background:var(--ink);color:#fff;}
+.btn.warm{background:var(--heat);border-color:var(--heat);color:#fff;}
+.btn.warm:hover{filter:brightness(.92);}
+.btn-spar{font-size:13px;padding:10px 16px;background:transparent;color:var(--ink-soft);border:1px solid var(--line);box-shadow:none;display:inline-flex;align-items:center;gap:8px;}
+.btn-spar:hover{color:var(--heat);border-color:var(--heat);background:#fff;transform:translateY(-1px);}
+.btn-spar svg{width:14px;height:14px;}
+.btn-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:28px;}
+
+/* ====== LANDING ====== */
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.18em;font-weight:700;color:var(--ink-soft);margin-bottom:18px;}
+.eyebrow .accent{color:var(--heat);}
+h1.hero-h{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(56px,11vw,108px);line-height:.92;letter-spacing:-.04em;margin:0 0 28px 0;font-variation-settings:"opsz" 144,"SOFT" 80;}
+h1.hero-h em{font-style:italic;color:var(--heat);font-weight:500;font-variation-settings:"opsz" 144,"SOFT" 100;}
+.lead{font-size:21px;line-height:1.5;max-width:600px;margin:0 0 8px 0;color:var(--ink-soft);}
+.lead strong{color:var(--ink);font-weight:600;}
+
+.pitch-section{margin-top:72px;}
+.pitch-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-weight:700;color:var(--heat);margin-bottom:14px;}
+.pitch-h{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(32px,5vw,46px);line-height:1.05;letter-spacing:-.025em;margin:0 0 18px 0;font-variation-settings:"opsz" 72,"SOFT" 60;}
+.pitch-h em{font-style:italic;color:var(--heat);}
+.pitch-body{font-size:17px;line-height:1.65;color:var(--ink-soft);max-width:620px;margin:0;}
+.pitch-body strong{color:var(--ink);font-weight:600;}
+
+/* The journey overview on landing */
+.journey-overview{margin-top:32px;}
+.journey-row{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:14px;background:rgba(255,255,255,.55);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.7);margin-bottom:8px;transition:transform 160ms ease;}
+.journey-row:hover{transform:translateX(4px);}
+.journey-num{font-family:'Fraunces',serif;font-weight:500;font-size:32px;line-height:1;color:var(--heat);min-width:36px;font-variation-settings:"opsz" 72,"SOFT" 80;}
+.journey-content{flex:1;}
+.journey-model{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:2px;}
+.journey-action{font-family:'Fraunces',serif;font-weight:500;font-size:17px;color:var(--ink);font-variation-settings:"opsz" 24;}
+.journey-action em{font-style:italic;}
+.journey-time{font-size:11px;color:var(--ink-faint);font-weight:500;}
+
+/* science cards (compact) */
+.science-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.sci-card{background:rgba(255,255,255,.6);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.7);border-radius:14px;padding:16px;box-shadow:var(--shadow-3);}
+.sci-card .sci-name{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--heat);font-weight:500;margin-bottom:6px;font-variation-settings:"opsz" 24;}
+.sci-card .sci-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.3;}
+.sci-card .sci-detail{font-size:12px;line-height:1.5;color:var(--ink-soft);}
+.sci-card .sci-detail strong{color:var(--ink);font-weight:600;}
+
+/* preview manifesto */
+.preview-section{margin-top:72px;}
+.preview-wrap{background:var(--paper);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-1);border:1px solid rgba(255,255,255,.9);transform:scale(0.96);transform-origin:center top;}
+.preview-cover{padding:36px 28px;background:var(--gradient-hero);border-bottom:1px solid var(--line);position:relative;}
+.preview-cover .top-mini{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:24px;font-weight:600;}
+.preview-cover h2{font-family:'Fraunces',serif;font-weight:500;font-size:44px;line-height:.95;letter-spacing:-.03em;margin:0;font-variation-settings:"opsz" 144,"SOFT" 100;}
+.preview-cover h2 .heat{color:var(--heat);font-style:italic;font-weight:500;}
+.preview-cover .preview-subtitle{font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--ink-soft);margin:12px 0 0 0;max-width:420px;line-height:1.45;font-variation-settings:"opsz" 36;}
+.preview-cover .preview-hero-pict{position:absolute;top:36px;right:24px;display:none;}
+@media(min-width:600px){.preview-cover .preview-hero-pict{display:block;}}
+.preview-body{padding:24px 28px;}
+.preview-row{display:grid;grid-template-columns:80px 1fr;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);}
+.preview-row:last-child{border-bottom:none;}
+.preview-pict{background:var(--paper-tint);border-radius:10px;padding:6px;display:flex;align-items:center;justify-content:center;min-height:40px;}
+.preview-when{font-family:'Fraunces',serif;font-style:italic;font-size:11px;color:var(--heat);font-weight:500;margin-bottom:2px;font-variation-settings:"opsz" 24;}
+.preview-what{font-size:14px;line-height:1.35;color:var(--ink);font-weight:500;}
+
+.theme-picker{margin-top:48px;}
+.theme-picker .label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin-bottom:14px;}
+.theme-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.theme-card{padding:18px 16px;border-radius:var(--radius);background:rgba(255,255,255,.6);backdrop-filter:blur(20px);border:2px solid transparent;cursor:pointer;transition:all 200ms ease;text-align:left;}
+.theme-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2);}
+.theme-card.active{border-color:var(--ink);background:#fff;}
+.theme-card .tc-name{font-family:'Fraunces',serif;font-weight:500;font-size:20px;line-height:1.05;margin:0 0 4px 0;letter-spacing:-.01em;font-variation-settings:"opsz" 36,"SOFT" 70;}
+.theme-card .tc-name em{font-style:italic;}
+.theme-card .tc-sub{font-size:11px;color:var(--ink-soft);margin:0 0 12px 0;line-height:1.4;}
+.theme-card .tc-preview{display:flex;justify-content:center;align-items:center;height:40px;}
+
+/* ====== JOURNEY BAR (in flow, sticky-ish) ====== */
+.journey-bar{margin-bottom:24px;padding:16px 18px;background:rgba(255,255,255,.7);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.8);border-radius:18px;box-shadow:var(--shadow-2);}
+.journey-segments{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;}
+.journey-seg{padding:8px 6px;border-radius:10px;cursor:pointer;text-align:center;transition:all 180ms ease;border:1px solid transparent;}
+.journey-seg:hover{background:rgba(255,255,255,.6);}
+.journey-seg .seg-num{font-family:'Fraunces',serif;font-weight:500;font-size:13px;line-height:1;color:var(--ink-faint);margin-bottom:4px;font-variation-settings:"opsz" 24;}
+.journey-seg .seg-label{font-size:10px;letter-spacing:.06em;font-weight:600;color:var(--ink-faint);line-height:1.2;}
+.journey-seg.done .seg-num,.journey-seg.done .seg-label{color:var(--ink-soft);}
+.journey-seg.done{background:rgba(26,24,20,.04);}
+.journey-seg.active{background:var(--heat-soft);border-color:var(--heat);}
+.journey-seg.active .seg-num,.journey-seg.active .seg-label{color:var(--heat);}
+.journey-seg.active .seg-label{font-weight:700;}
+
+/* ====== STEP CARD ====== */
+.step{display:none;}
+.step.active{display:block;animation:fadeIn 280ms ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.step-card{background:var(--paper);border-radius:var(--radius);padding:0;box-shadow:var(--shadow-1);border:1px solid rgba(255,255,255,.9);overflow:hidden;}
+
+/* the compact "why" module */
+.step-module{padding:32px 36px 28px;background:linear-gradient(180deg,var(--paper-tint) 0%,var(--paper) 100%);}
+.module-eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--heat);margin-bottom:12px;}
+.module-title{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,4.6vw,38px);line-height:1.08;letter-spacing:-.02em;margin:0 0 20px 0;font-variation-settings:"opsz" 72,"SOFT" 60;}
+.module-title em{font-style:italic;color:var(--heat);}
+
+/* Visual elements within modules */
+.viz-row{display:grid;gap:10px;margin-bottom:18px;}
+.viz-row.cols-2{grid-template-columns:1fr 1fr;}
+.viz-row.cols-3{grid-template-columns:repeat(3,1fr);}
+
+.viz-card{padding:14px 16px;border-radius:14px;background:rgba(0,0,0,.02);border:1px solid var(--line);}
+.viz-card.tinted{background:var(--heat-soft);border-color:transparent;}
+.viz-card.dark{background:var(--ink);color:#fff;border-color:transparent;}
+.viz-card.dark .viz-stat{color:var(--heat-soft);}
+.viz-card.dark .viz-label,.viz-card.dark .viz-text{color:rgba(255,255,255,.7);}
+.viz-stat{font-family:'Fraunces',serif;font-weight:500;font-size:34px;line-height:1;color:var(--heat);font-variation-settings:"opsz" 60;display:block;margin-bottom:4px;}
+.viz-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
+.viz-text{font-size:13px;line-height:1.4;color:var(--ink);}
+.viz-text strong{font-weight:600;}
+.viz-text em{font-style:italic;color:var(--heat);}
+
+.viz-quote{padding:18px 22px;border-left:3px solid var(--heat);background:rgba(0,0,0,.02);border-radius:0 14px 14px 0;}
+.viz-quote .quote-text{font-family:'Fraunces',serif;font-style:italic;font-size:18px;line-height:1.4;color:var(--ink);font-variation-settings:"opsz" 36;margin:0;}
+.viz-quote .quote-source{font-size:11px;color:var(--ink-soft);margin-top:8px;letter-spacing:.06em;}
+
+.module-foot{font-size:13px;line-height:1.55;color:var(--ink-soft);margin-top:6px;}
+.module-foot strong{color:var(--ink);font-weight:600;}
+.module-foot em{font-style:italic;}
+.module-cite{font-size:11px;color:var(--ink-faint);margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-style:italic;letter-spacing:.02em;}
+.module-cite strong{font-style:normal;color:var(--ink-soft);font-weight:600;}
+
+/* action area */
+.step-action{padding:28px 36px 32px;}
+.action-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:10px;}
+.action-prompt{font-family:'Fraunces',serif;font-weight:500;font-size:22px;line-height:1.2;letter-spacing:-.015em;margin:0 0 18px 0;font-variation-settings:"opsz" 48;}
+
+input[type="text"],textarea,input[type="date"]{font-family:inherit;font-size:19px;line-height:1.4;width:100%;padding:16px 20px;border:1.5px solid var(--line);background:var(--paper-tint);color:var(--ink);border-radius:18px;outline:none;transition:all 180ms ease;}
+input[type="text"]:focus,textarea:focus,input[type="date"]:focus{border-color:var(--heat);background:#fff;box-shadow:0 0 0 4px var(--heat-soft);}
+textarea{min-height:120px;resize:vertical;font-size:17px;}
+::placeholder{color:#c8bda8;}
+
+.suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.chip{font-size:13px;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.5);cursor:pointer;color:var(--ink-soft);font-weight:500;transition:all 160ms ease;}
+.chip:hover{border-color:var(--heat);color:var(--heat);background:#fff;}
+
+.if-then-block{padding:18px;border-radius:16px;background:var(--paper-tint);border:1px solid var(--line);margin-bottom:12px;}
+.if-then-num{font-size:11px;color:var(--heat);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;}
+.if-then-row{display:grid;grid-template-columns:80px 1fr;gap:10px;align-items:center;margin-bottom:8px;}
+.if-then-row:last-child{margin-bottom:0;}
+.if-then-label{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--ink-soft);font-variation-settings:"opsz" 24;}
+.if-then-row input{font-size:16px;padding:10px 14px;}
+
+/* AI sparring section in each step */
+.spar-divider{margin:24px 0 16px;border-top:1px dashed var(--line);position:relative;}
+.spar-divider span{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--paper);padding:0 12px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;}
+.spar-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;background:var(--paper-tint);border-radius:14px;border:1px dashed var(--line);}
+.spar-text{font-size:13px;color:var(--ink-soft);line-height:1.45;flex:1;}
+.spar-text strong{color:var(--ink);font-weight:600;}
+
+/* Toast */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:14px 20px;border-radius:999px;font-size:14px;font-weight:500;box-shadow:var(--shadow-1);z-index:2000;opacity:0;pointer-events:none;transition:all 280ms ease;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast .toast-icon{display:inline-block;margin-right:8px;color:var(--color-b);}
+
+/* demo banner */
+.demo-banner{background:var(--heat);color:#fff;border-radius:999px;padding:10px 16px;font-size:12px;font-weight:600;letter-spacing:.06em;display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;}
+.demo-banner .badge{background:rgba(255,255,255,.25);padding:3px 8px;border-radius:999px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;}
+
+/* ====== MANIFESTO ====== */
+#manifesto{display:none;}
+.manifesto-frame{background:var(--paper);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-1);border:1px solid rgba(255,255,255,.9);}
+.manifesto-cover{padding:56px 44px 44px;background:var(--gradient-hero);border-bottom:1px solid var(--line);position:relative;}
+.manifesto-cover .top-row{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:40px;font-weight:600;}
+.manifesto-cover .theme-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin-bottom:20px;}
+.manifesto-cover .theme-tag .tag-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--color-a),var(--color-b),var(--color-c));}
+.manifesto-cover h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(56px,12vw,108px);line-height:.9;letter-spacing:-.045em;margin:0 0 12px 0;font-variation-settings:"opsz" 144,"SOFT" 100;}
+.manifesto-cover h1 .heat{color:var(--heat);font-style:italic;font-weight:500;}
+.manifesto-cover .subtitle{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:22px;line-height:1.45;color:var(--ink-soft);margin:24px 0 0 0;max-width:540px;font-variation-settings:"opsz" 36;}
+.manifesto-cover .hero-pict{position:absolute;top:40px;right:32px;width:140px;height:70px;opacity:.95;display:none;}
+@media(min-width:600px){.manifesto-cover .hero-pict{display:block;}}
+
+.manifesto-body{padding:44px 44px 24px;}
+.section-block{margin-bottom:40px;}
+.section-block:last-child{margin-bottom:0;}
+.section-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.section-label::before{content:"";display:block;width:24px;height:1.5px;background:var(--heat);border-radius:2px;}
+
+.plan-row{display:grid;grid-template-columns:110px 1fr;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);}
+.plan-row:last-child{border-bottom:none;}
+.plan-row .pict-wrap{background:var(--paper-tint);border-radius:14px;padding:8px;display:flex;align-items:center;justify-content:center;min-height:56px;}
+.plan-row .when{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--heat);font-weight:500;margin-bottom:2px;font-variation-settings:"opsz" 24;}
+.plan-row .what{font-size:17px;line-height:1.4;color:var(--ink);font-weight:500;}
+
+.anchor{display:flex;align-items:center;gap:24px;padding:28px;background:linear-gradient(135deg,var(--ink) 0%,#2e2820 100%);color:#fff;border-radius:18px;}
+.anchor .countdown{font-family:'Fraunces',serif;font-weight:500;font-size:68px;line-height:1;color:var(--color-b);font-variation-settings:"opsz" 144,"SOFT" 100;}
+.anchor .countdown-small{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;margin-top:6px;}
+.anchor .what-anchor{font-size:18px;line-height:1.45;font-weight:500;flex:1;}
+.anchor .anchor-date{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:8px;font-weight:600;}
+
+.hobby-quote{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:24px;line-height:1.35;font-variation-settings:"opsz" 48;color:var(--ink);margin:0;}
+.hobby-quote strong{font-style:normal;font-weight:600;color:var(--heat);}
+
+.obstacle-card{padding:24px;background:var(--heat-soft);border-radius:18px;}
+.obstacle-card .obstacle-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--heat);font-weight:700;margin-bottom:10px;}
+.obstacle-card .obstacle-text{font-size:16px;line-height:1.55;color:var(--ink);}
+.obstacle-card .obstacle-text strong{font-weight:600;}
+
+.pictogram-strip{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;padding:32px 0 8px;}
+.pictogram-strip .item{text-align:center;}
+.pictogram-strip .item-name{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:8px;font-weight:600;}
+
+.manifesto-footer{padding:24px 44px;background:var(--paper-tint);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
+
+/* ====== PICTOGRAM STYLES ====== */
+svg.picto .shape-a{fill:var(--color-a);}
+svg.picto .shape-b{fill:var(--color-b);}
+svg.picto .shape-c{fill:var(--color-c);}
+svg.picto .stroke-a{fill:none;stroke:var(--color-a);stroke-linecap:round;stroke-linejoin:round;}
+svg.picto .stroke-b{fill:none;stroke:var(--color-b);stroke-linecap:round;stroke-linejoin:round;}
+svg.picto .stroke-c{fill:none;stroke:var(--color-c);stroke-linecap:round;stroke-linejoin:round;}
+svg.picto .ornament{stroke:var(--ornament-stroke);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+svg.picto .ornament-dot{fill:var(--ornament-stroke);}
+svg.picto .ornament-line{stroke:var(--ornament-stroke);stroke-width:1.8;stroke-linecap:round;}
+
+@media(max-width:680px){
+  main{padding:16px 16px 100px;}
+  .nav{padding:8px 12px;}
+  .step-module,.step-action{padding-left:22px;padding-right:22px;}
+  .step-module{padding-top:26px;padding-bottom:22px;}
+  .step-action{padding-bottom:26px;}
+  .manifesto-cover{padding:36px 22px 28px;}
+  .manifesto-body{padding:28px 22px;}
+  .manifesto-footer{padding:18px 22px;flex-direction:column;gap:6px;}
+  .theme-cards,.science-grid{grid-template-columns:1fr;}
+  .if-then-row{grid-template-columns:1fr;gap:6px;}
+  .anchor{flex-direction:column;align-items:flex-start;}
+  .anchor .countdown{font-size:52px;}
+  .nav-right .nav-date{display:none;}
+  .viz-row.cols-3,.viz-row.cols-2{grid-template-columns:1fr;}
+  .journey-segments{grid-template-columns:repeat(6,1fr);gap:2px;}
+  .journey-seg{padding:6px 2px;}
+  .journey-seg .seg-label{display:none;}
+  .journey-seg.active .seg-label{display:block;font-size:9px;}
+  .spar-row{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body data-theme="c">
+
+<main>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="brand"><span class="brand-dot"></span> Name Your Summer</div>
+    <div class="nav-right">
+      <div class="theme-switcher">
+        <div class="pill" data-pill="a" onclick="setTheme('a')" title="Mediterranean Noon"></div>
+        <div class="pill active" data-pill="c" onclick="setTheme('c')" title="Tropical Pop"></div>
+        <div class="pill" data-pill="d" onclick="setTheme('d')" title="Lake & Pine"></div>
+      </div>
+      <div class="nav-date" id="today-date">— · — · —</div>
+    </div>
+  </nav>
+
+  <!-- ============ LANDING ============ -->
+  <section id="screen-landing">
+    <div class="eyebrow">A six-minute ritual · <span class="accent">Anonymous, no account</span></div>
+    <h1 class="hero-h">Name your<br><em>summer.</em></h1>
+    <p class="lead"><strong>You only get so many summers.</strong> Most of them blur. The ones you remember had names — and the names came from doing things on purpose.</p>
+
+    <div class="btn-row">
+      <button class="btn warm" onclick="goToStep(1)">Begin the ritual →</button>
+      <button class="btn ghost" onclick="loadDemo()">Show me an example</button>
+    </div>
+
+    <!-- The 6-step journey overview -->
+    <section class="pitch-section">
+      <div class="pitch-eyebrow">The journey · six minutes</div>
+      <h2 class="pitch-h">Six steps. <em>Six models.</em></h2>
+      <p class="pitch-body" style="margin-bottom:8px;">Each step is named for the psychology research it's built on. Nothing here is decorative.</p>
+      <div class="journey-overview" id="journey-overview"></div>
+    </section>
+
+    <!-- Science cards -->
+    <section class="pitch-section">
+      <div class="pitch-eyebrow">What this is built on</div>
+      <h2 class="pitch-h">Three pieces of <em>real research.</em></h2>
+      <div class="science-grid">
+        <div class="sci-card">
+          <div class="sci-name">Implementation intentions</div>
+          <div class="sci-title">If-then plans roughly double success rate</div>
+          <div class="sci-detail"><strong>94 studies</strong>, d ≈ 0.65. Most-studied behavior-change intervention. <em>Gollwitzer & Sheeran, 2006.</em></div>
+        </div>
+        <div class="sci-card">
+          <div class="sci-name">Mental contrasting</div>
+          <div class="sci-title">Pure positive thinking backfires</div>
+          <div class="sci-detail">Fantasy without obstacle predicts <strong>worse</strong> outcomes. 25 years of replications. <em>Oettingen, 2014.</em></div>
+        </div>
+        <div class="sci-card">
+          <div class="sci-name">Anticipatory savoring</div>
+          <div class="sci-title">Looking forward is its own reward</div>
+          <div class="sci-detail">Vacations: <strong>two weeks before</strong> Greece beats the week in Greece. <em>Bryant & Veroff, 2007.</em></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preview -->
+    <section class="preview-section">
+      <div class="pitch-eyebrow">What you walk away with</div>
+      <h2 class="pitch-h">One manifesto. <em>Shareable.</em></h2>
+      <p class="pitch-body" style="margin-bottom:24px;">A page with your name, your three if-then plans (illustrated), your anchor event with live countdown, and a quiet line about the obstacle you named — so when it hits, you've already decided what to do.</p>
+      <div class="preview-wrap">
+        <div class="preview-cover">
+          <div class="preview-hero-pict" id="preview-hero-pict"></div>
+          <div class="top-mini"><span>Preview · Filed today</span><span>Manifesto · Edition 1</span></div>
+          <h2 class="serif">The summer<br>of <span class="heat">saying yes.</span></h2>
+          <p class="preview-subtitle">I'm telling Sara about the boat day with the Berlin friends, the night swim in the Aare, the morning I biked to work just because I wanted to.</p>
+        </div>
+        <div class="preview-body">
+          <div class="preview-row">
+            <div class="preview-pict" id="prev-row-1"></div>
+            <div><div class="preview-when">when it's Wednesday after work</div><div class="preview-what">I will text two friends and propose dinner outside</div></div>
+          </div>
+          <div class="preview-row">
+            <div class="preview-pict" id="prev-row-2"></div>
+            <div><div class="preview-when">when it's a sunny Saturday morning</div><div class="preview-what">I will be on my bike by 9, no exceptions</div></div>
+          </div>
+          <div class="preview-row">
+            <div class="preview-pict" id="prev-row-3"></div>
+            <div><div class="preview-when">when it rains on a weekend</div><div class="preview-what">I will go to the bookshop, not Netflix</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Theme picker -->
+    <div class="theme-picker">
+      <div class="label">Pick a world to start in →</div>
+      <div class="theme-cards" id="theme-cards">
+        <div class="theme-card" data-theme="a" onclick="setTheme('a')">
+          <h3 class="tc-name">Mediterranean <em>noon.</em></h3>
+          <p class="tc-sub">Cobalt, lemon, geranium.</p>
+          <div class="tc-preview" id="preview-a"></div>
+        </div>
+        <div class="theme-card active" data-theme="c" onclick="setTheme('c')">
+          <h3 class="tc-name">Tropical <em>pop.</em></h3>
+          <p class="tc-sub">Hot pink, turquoise, sun.</p>
+          <div class="tc-preview" id="preview-c"></div>
+        </div>
+        <div class="theme-card" data-theme="d" onclick="setTheme('d')">
+          <h3 class="tc-name">Lake & <em>pine.</em></h3>
+          <p class="tc-sub">Pine, lake teal, terracotta.</p>
+          <div class="tc-preview" id="preview-d"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn warm" onclick="goToStep(1)">Begin the ritual →</button>
+      <button class="btn ghost" onclick="loadDemo()">Show example summer</button>
+    </div>
+  </section>
+
+  <!-- ============ FLOW ============ -->
+  <section id="flow" style="display:none;">
+
+    <!-- Journey bar (sticky-ish) -->
+    <div class="journey-bar">
+      <div class="journey-segments" id="journey-bar"></div>
+    </div>
+
+    <!-- ===== STEP 1: NAME — Fresh start ===== -->
+    <div class="step" data-step="1">
+      <div class="step-card">
+        <div class="step-module">
+          <div class="module-eyebrow">Step 1 · Fresh start (Naming)</div>
+          <h2 class="module-title">A name creates a <em>line.</em></h2>
+
+          <div class="viz-row cols-2">
+            <div class="viz-card">
+              <div class="viz-label">No name</div>
+              <div class="viz-text">"Summer 2022" → blur</div>
+            </div>
+            <div class="viz-card tinted">
+              <div class="viz-label">With a name</div>
+              <div class="viz-text"><em>"Summer of saying yes"</em> → every choice has a vote</div>
+            </div>
+          </div>
+
+          <p class="module-foot">The cheapest commitment available — <strong>ten seconds, costs nothing</strong>, gives every later choice a measure to vote against.</p>
+          <div class="module-cite"><strong>Source:</strong> Fresh-start effect · Dai, Milkman & Riis, 2014, <em>Management Science</em></div>
+        </div>
+
+        <div class="step-action">
+          <div class="action-eyebrow">Your turn →</div>
+          <div class="action-prompt serif">What's your summer's name?</div>
+          <input type="text" id="input-name" placeholder="The summer of…" autocomplete="off" />
+          <div class="suggestions">
+            <span class="chip" onclick="setInput('input-name','The summer of speed')">The summer of speed</span>
+            <span class="chip" onclick="setInput('input-name','The summer of saying yes')">The summer of saying yes</span>
+            <span class="chip" onclick="setInput('input-name','The summer of the lake')">The summer of the lake</span>
+            <span class="chip" onclick="setInput('input-name','The summer of slow mornings')">The summer of slow mornings</span>
+          </div>
+
+          <div class="spar-divider"><span>Stuck?</span></div>
+          <div class="spar-row">
+            <div class="spar-text"><strong>Spar with an AI.</strong> Copy a tailored prompt — paste into Claude, ChatGPT, anywhere you think.</div>
+            <button class="btn-spar" onclick="copySpar(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy prompt</button>
+          </div>
+
+          <div class="btn-row"><button class="btn" onclick="goToStep(2)">Next →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 2: WISH — Anticipatory savoring ===== -->
+    <div class="step" data-step="2">
+      <div class="step-card">
+        <div class="step-module">
+          <div class="module-eyebrow">Step 2 · Savoring (Imagine forward)</div>
+          <h2 class="module-title">Rehearse the <em>future.</em></h2>
+
+          <div class="viz-row cols-2">
+            <div class="viz-card">
+              <span class="viz-stat">+1</span>
+              <div class="viz-label">Positive affect <em>now</em></div>
+              <div class="viz-text" style="margin-top:4px;">As you write it.</div>
+            </div>
+            <div class="viz-card">
+              <span class="viz-stat">+1</span>
+              <div class="viz-label">Enjoyment <em>then</em></div>
+              <div class="viz-text" style="margin-top:4px;">When the moments arrive.</div>
+            </div>
+          </div>
+
+          <p class="module-foot">Athletes do this. Surgeons do this. <strong>Anyone good at hard things rehearses the outcome in sensory detail first.</strong></p>
+          <div class="module-cite"><strong>Source:</strong> Anticipatory savoring · Bryant & Veroff, 2007</div>
+        </div>
+
+        <div class="step-action">
+          <div class="action-eyebrow">Your turn →</div>
+          <div class="action-prompt serif">It's late August. You're glowing. What do you tell a friend?</div>
+          <textarea id="input-wish" placeholder="I'm telling them about…"></textarea>
+
+          <div class="spar-divider"><span>Stuck?</span></div>
+          <div class="spar-row">
+            <div class="spar-text"><strong>Spar with an AI.</strong> Get help writing three vivid, sensory sentences about a summer you haven't lived yet.</div>
+            <button class="btn-spar" onclick="copySpar(2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy prompt</button>
+          </div>
+
+          <div class="btn-row"><button class="btn ghost" onclick="goToStep(1)">← Back</button><button class="btn" onclick="goToStep(3)">Next →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 3: OBSTACLE — Mental contrasting ===== -->
+    <div class="step" data-step="3">
+      <div class="step-card">
+        <div class="step-module">
+          <div class="module-eyebrow">Step 3 · Contrasting (Get honest)</div>
+          <h2 class="module-title">Wishing alone <em>backfires.</em></h2>
+
+          <div class="viz-row cols-2">
+            <div class="viz-card">
+              <div class="viz-label">Wish only</div>
+              <div class="viz-text" style="font-size:14px;">Brain rewards you <strong>now</strong> for outcome that hasn't happened →</div>
+              <div class="viz-text" style="margin-top:6px;color:#c25a3d;font-weight:600;">predicts worse outcomes</div>
+            </div>
+            <div class="viz-card tinted">
+              <div class="viz-label">Wish + obstacle</div>
+              <div class="viz-text" style="font-size:14px;">Daydream gets <strong>contrasted</strong> against the real friction →</div>
+              <div class="viz-text" style="margin-top:6px;color:var(--heat);font-weight:600;">predicts action</div>
+            </div>
+          </div>
+
+          <p class="module-foot">Name the friction. It's almost never money or time — <strong>it's a habit.</strong> Yours, at 7pm on the couch.</p>
+          <div class="module-cite"><strong>Source:</strong> Mental contrasting · Oettingen, 2014 · 25 years of replication</div>
+        </div>
+
+        <div class="step-action">
+          <div class="action-eyebrow">Your turn →</div>
+          <div class="action-prompt serif">What's most likely to get in the way?</div>
+          <input type="text" id="input-obstacle" placeholder="Honestly, the thing is…" />
+          <div class="suggestions">
+            <span class="chip" onclick="setInput('input-obstacle','I get home tired and default to the couch')">Tired after work</span>
+            <span class="chip" onclick="setInput('input-obstacle','I wait for someone to invite me')">Waiting to be invited</span>
+            <span class="chip" onclick="setInput('input-obstacle','I overthink and don\'t text people')">Overthinking</span>
+            <span class="chip" onclick="setInput('input-obstacle','I just forget')">Forgetting</span>
+          </div>
+
+          <div class="spar-divider"><span>Stuck?</span></div>
+          <div class="spar-row">
+            <div class="spar-text"><strong>Spar with an AI.</strong> First answers about obstacles are often deflections. Get pushed to name the real thing.</div>
+            <button class="btn-spar" onclick="copySpar(3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy prompt</button>
+          </div>
+
+          <div class="btn-row"><button class="btn ghost" onclick="goToStep(2)">← Back</button><button class="btn" onclick="goToStep(4)">Next →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 4: HOBBY — Pre-commitment ===== -->
+    <div class="step" data-step="4">
+      <div class="step-card">
+        <div class="step-module">
+          <div class="module-eyebrow">Step 4 · Pre-commitment (Quit-date hobby)</div>
+          <h2 class="module-title">Pre-commit to <em>stop.</em></h2>
+
+          <div class="viz-row cols-2">
+            <div class="viz-card">
+              <div class="viz-label">Open-ended</div>
+              <div class="viz-text" style="font-size:14px;"><em>"I'm becoming a chess player"</em></div>
+              <div class="viz-text" style="margin-top:6px;color:#c25a3d;font-weight:600;">→ pressure, never starts</div>
+            </div>
+            <div class="viz-card tinted">
+              <div class="viz-label">Time-boxed</div>
+              <div class="viz-text" style="font-size:14px;"><em>"I'm playing chess for the summer"</em></div>
+              <div class="viz-text" style="margin-top:6px;color:var(--heat);font-weight:600;">→ starts tonight</div>
+            </div>
+          </div>
+
+          <p class="module-foot"><strong>September 21 is locked.</strong> Autumn equinox. The day this hobby ends, no matter what. Knowing the end is coming makes starting weightless.</p>
+          <div class="module-cite"><strong>Source:</strong> Pre-commitment lowers activation cost · behavioral economics 101</div>
+        </div>
+
+        <div class="step-action">
+          <div class="action-eyebrow">Your turn →</div>
+          <div class="action-prompt serif">What's the thing you'll start now and quit Sept 21?</div>
+          <input type="text" id="input-hobby" placeholder="I'll get back into…" />
+          <div class="suggestions">
+            <span class="chip" onclick="setInput('input-hobby','playing chess')">chess</span>
+            <span class="chip" onclick="setInput('input-hobby','skateboarding')">skateboarding</span>
+            <span class="chip" onclick="setInput('input-hobby','playing guitar')">guitar</span>
+            <span class="chip" onclick="setInput('input-hobby','bouldering outside')">bouldering</span>
+            <span class="chip" onclick="setInput('input-hobby','swimming in the river')">river swimming</span>
+          </div>
+
+          <div class="spar-divider"><span>Stuck?</span></div>
+          <div class="spar-row">
+            <div class="spar-text"><strong>Spar with an AI.</strong> Brainstorm hobbies that fit your week, budget, and energy — not just what sounds cool.</div>
+            <button class="btn-spar" onclick="copySpar(4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy prompt</button>
+          </div>
+
+          <div class="btn-row"><button class="btn ghost" onclick="goToStep(3)">← Back</button><button class="btn" onclick="goToStep(5)">Next →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 5: IF-THEN — Implementation intentions ===== -->
+    <div class="step" data-step="5">
+      <div class="step-card">
+        <div class="step-module">
+          <div class="module-eyebrow">Step 5 · Implementation intentions (If-then)</div>
+          <h2 class="module-title">This is the part <em>that works.</em></h2>
+
+          <div class="viz-row cols-3">
+            <div class="viz-card dark">
+              <span class="viz-stat">0.65</span>
+              <div class="viz-label">Effect size (d)</div>
+            </div>
+            <div class="viz-card dark">
+              <span class="viz-stat">94</span>
+              <div class="viz-label">Studies analyzed</div>
+            </div>
+            <div class="viz-card dark">
+              <span class="viz-stat">~2×</span>
+              <div class="viz-label">Vs goal alone</div>
+            </div>
+          </div>
+
+          <p class="module-foot">Pre-decided triggers bypass willpower. When the moment comes, <strong>you don't deliberate</strong> — you execute the plan you already made. The trigger must be <em>specific</em>: a time, a place, a moment. Not a feeling.</p>
+          <div class="module-cite"><strong>Source:</strong> Implementation intentions · Gollwitzer & Sheeran, 2006 meta-analysis</div>
+        </div>
+
+        <div class="step-action">
+          <div class="action-eyebrow">Your turn →</div>
+          <div class="action-prompt serif">Write three "when this, I will that" plans.</div>
+
+          <div class="if-then-block">
+            <div class="if-then-num">Plan 1</div>
+            <div class="if-then-row"><div class="if-then-label">When</div><input type="text" id="input-trigger-1" placeholder="it's Wednesday after work…" /></div>
+            <div class="if-then-row"><div class="if-then-label">I will</div><input type="text" id="input-action-1" placeholder="text two friends and go to the park" /></div>
+          </div>
+          <div class="if-then-block">
+            <div class="if-then-num">Plan 2</div>
+            <div class="if-then-row"><div class="if-then-label">When</div><input type="text" id="input-trigger-2" placeholder="it's a sunny Saturday morning…" /></div>
+            <div class="if-then-row"><div class="if-then-label">I will</div><input type="text" id="input-action-2" placeholder="be on my bike by 9, no exceptions" /></div>
+          </div>
+          <div class="if-then-block">
+            <div class="if-then-num">Plan 3</div>
+            <div class="if-then-row"><div class="if-then-label">When</div><input type="text" id="input-trigger-3" placeholder="it rains on a weekend…" /></div>
+            <div class="if-then-row"><div class="if-then-label">I will</div><input type="text" id="input-action-3" placeholder="go to the bookshop, not Netflix" /></div>
+          </div>
+
+          <div class="spar-divider"><span>Stuck?</span></div>
+          <div class="spar-row">
+            <div class="spar-text"><strong>Spar with an AI.</strong> Bad if-then plans use feelings as triggers. Get drafts that use real time/place anchors.</div>
+            <button class="btn-spar" onclick="copySpar(5)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy prompt</button>
+          </div>
+
+          <div class="btn-row"><button class="btn ghost" onclick="goToStep(4)">← Back</button><button class="btn" onclick="goToStep(6)">Next →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 6: ANCHOR — Anticipation ===== -->
+    <div class="step" data-step="6">
+      <div class="step-card">
+        <div class="step-module">
+          <div class="module-eyebrow">Step 6 · Anticipation (Anchor event)</div>
+          <h2 class="module-title">Looking forward <em>is the reward.</em></h2>
+
+          <div class="viz-quote">
+            <p class="quote-text">"The two weeks before Greece generate more cumulative happiness than the week actually in Greece."</p>
+            <div class="quote-source">— Bryant & Veroff, Savoring (2007)</div>
+          </div>
+
+          <p class="module-foot" style="margin-top:14px;">One specific dated event. <strong>Specificity is what lets the brain rehearse it.</strong> "Train to Lisbon, July 14" beats "summer travel."</p>
+          <div class="module-cite"><strong>Source:</strong> Anchored anticipation · Bryant & Veroff, 2007 · Van Boven, 2010</div>
+        </div>
+
+        <div class="step-action">
+          <div class="action-eyebrow">Your turn →</div>
+          <div class="action-prompt serif">Name one specific thing on a specific date.</div>
+          <input type="text" id="input-anchor-name" placeholder="The thing — e.g., 'Train to Lisbon with Sara'" style="margin-bottom:12px;" />
+          <input type="date" id="input-anchor-date" />
+
+          <div class="spar-divider"><span>Stuck?</span></div>
+          <div class="spar-row">
+            <div class="spar-text"><strong>Spar with an AI.</strong> Turn a vague idea ("travel") into a specific, dated, mentally-rehearsable anchor.</div>
+            <button class="btn-spar" onclick="copySpar(6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy prompt</button>
+          </div>
+
+          <div class="btn-row"><button class="btn ghost" onclick="goToStep(5)">← Back</button><button class="btn warm" onclick="generateManifesto()">Generate my manifesto →</button></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ MANIFESTO ============ -->
+  <section id="manifesto">
+    <div id="demo-banner-wrap"></div>
+    <div class="action-eyebrow" style="margin-bottom:12px;">Your manifesto · <span style="color:var(--heat);">Memphis edition</span></div>
+    <div class="manifesto-frame" id="manifesto-render"></div>
+    <div class="btn-row" style="justify-content:center;">
+      <button class="btn ghost" onclick="restart()">↺ Start over</button>
+      <button class="btn" onclick="cycleTheme()">↻ Try another world</button>
+      <button class="btn warm" onclick="alert('In production: shareable URL with 30-day TTL on Cloudflare KV.')">Share link →</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// =======================================================================
+// JOURNEY MODEL — single source of truth
+// =======================================================================
+const JOURNEY = [
+  { num: 1, model: 'Fresh start',     action: 'Naming',          time: '30 sec' },
+  { num: 2, model: 'Savoring',        action: 'Imagining',       time: '1 min' },
+  { num: 3, model: 'Contrasting',     action: 'Get honest',      time: '30 sec' },
+  { num: 4, model: 'Pre-commitment',  action: 'Quit-date hobby', time: '30 sec' },
+  { num: 5, model: 'Implementation',  action: 'If-then plans',   time: '2 min' },
+  { num: 6, model: 'Anticipation',    action: 'Anchor event',    time: '1 min' },
+];
+
+// =======================================================================
+// SPARRING PROMPTS — one per step, clipboard-ready
+// =======================================================================
+const SPAR_PROMPTS = {
+  1: `I'm doing a six-step "Name Your Summer" ritual based on behavioral science. I'm on step 1: naming the summer.
+
+The format: "The summer of ___" — short, specific, evocative. Research (Dai, Milkman & Riis 2014, "fresh start effect") shows naming a time period creates a psychological boundary that boosts goal initiation.
+
+About me, briefly:
+[ADD A FEW LINES — your situation, what feels open this year, what you're moving toward or away from]
+
+Help me brainstorm 5–7 candidate names. They should be specific and earnable — not generic motivational stuff.
+
+For tone calibration: "The summer of saying yes," "The summer of slow mornings," "The summer of strangers," "The summer of speed."
+
+After the list, tell me which one you'd pick if you were me, and why.`,
+
+  2: `I'm doing a behavioral-science summer-planning ritual. I'm on step 2: anticipatory savoring.
+
+The exercise: imagine yourself in late August, telling a friend how summer went. The friend asks; I light up. What am I telling them?
+
+The research: writing this scene in sensory detail (sights, sounds, who's there, what the light was like) generates real present positive emotion AND increases enjoyment when those moments arrive (Bryant & Veroff, 2007).
+
+My summer is named: [YOUR NAME]
+Things that would make me say "what a summer" if they happened this year:
+- [a few rough bullets — be honest, even small things]
+
+Help me write three vivid sentences I could tell a friend in September — specific, sensory, first-person. NOT generic. Pretend I actually did the things and I'm just remembering them.`,
+
+  3: `I'm doing a behavioral-science summer ritual. I'm on step 3: mental contrasting.
+
+The research (Oettingen, 25 years of replications): positive thinking ALONE actually predicts WORSE outcomes. The fix is naming the internal obstacle in the same breath as the wish.
+
+My summer name: [YOUR NAME]
+What I want this summer to feel like: [YOUR WISH]
+
+Now, honestly: what's most likely to get in the way? It's almost never money or time — it's usually a habit, a thought pattern, or an avoidance behavior.
+
+Help me name the REAL obstacle. If my first answer feels like a deflection ("I'm too busy," "I don't know"), push back. Ask me follow-up questions until we get to the actual specific habit or thought that derails me. Be a good therapist about this, not a pushover.`,
+
+  4: `I'm doing a six-step summer ritual. I'm on step 4: picking a hobby for the summer that I'll quit on September 21 (autumn equinox).
+
+The idea: hobbies fail when framed as forever. A built-in end-date removes performance pressure. I'm not "becoming a chess player" — I'm playing chess for the summer.
+
+About me:
+- Interests / things I'm curious about: [a few]
+- Things I used to do but dropped: [a few]
+- Time/budget reality: [be honest — how much time per week, what budget]
+
+Help me pick ONE hobby that:
+- Costs little or nothing (under €50 total)
+- Can start THIS week
+- I'd genuinely enjoy, not "should" enjoy
+- Has natural session-able structure (not "learn French" — too big; "play one chess game per day" — yes)
+
+Suggest 3 options with one-line reasoning each. Then pick the one you'd bet on if you were me, and why.`,
+
+  5: `I'm doing a summer planning ritual. I'm on step 5: writing three implementation intentions (Gollwitzer & Sheeran 2006 meta-analysis, d ≈ 0.65 across 94 studies, ~2× success rate vs goals alone).
+
+The format: "When [specific trigger], I will [specific action]."
+
+CRITICAL rules:
+- Trigger must be SPECIFIC: a time, a place, a moment. NOT a feeling or mood.
+- BAD: "When I feel like exercising, I will go to the gym."
+- GOOD: "When my Tuesday workday ends, I will put on my running shoes before checking my phone."
+
+My summer name: [YOUR NAME]
+My wish: [YOUR WISH]
+My obstacle: [YOUR OBSTACLE]
+
+Help me draft three if-then plans. Each plan should:
+1. Have a real trigger (time + place ideally, never an emotion)
+2. Lead to a small, doable action (not a heroic goal)
+3. Together: address my obstacle from three different angles or moments of the week.
+
+Show me three drafts with brief reasoning. Then I'll tell you which to refine.`,
+
+  6: `I'm doing a summer planning ritual. I'm on step 6: anchored anticipation.
+
+The research: studies on vacation happiness show the two weeks BEFORE Greece generate more cumulative happiness than the week IN Greece (Bryant & Veroff, 2007; Van Boven, 2010). Looking forward to something specific is a measurable mood boost.
+
+The exercise: name ONE specific dated event this summer that I can already start looking forward to. Specificity is what lets the brain rehearse it.
+
+BAD: "summer travel"
+GOOD: "Train to Lisbon with Sara, July 14"
+BEST: "Coffee at A Brasileira in Lisbon with Sara on July 14, after a slow morning"
+
+My summer is: [YOUR NAME]
+Possible candidate events I've been thinking about:
+- [a few rough ideas — even ones that feel out of reach]
+
+Help me pick ONE and turn it into a vivid, dated, specific anchor I can mentally rehearse.
+
+Then suggest a small "savoring practice" — something I could do once a week between now and the event to extend the anticipation (look at one photo? plan the morning of? tell someone about it?). Make it concrete.`,
+};
+
+// =======================================================================
+// THEME
+// =======================================================================
+function setTheme(theme) {
+  document.body.setAttribute('data-theme', theme);
+  document.querySelectorAll('.theme-switcher .pill').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.theme-switcher .pill[data-pill="${theme}"]`)?.classList.add('active');
+  document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.theme-card[data-theme="${theme}"]`)?.classList.add('active');
+  renderPreviews();
+  renderManifestoPreview();
+  if (document.getElementById('manifesto').style.display === 'block') generateManifesto({fromDemo: state._fromDemo});
+}
+function cycleTheme() {
+  const themes = ['a','c','d'];
+  const current = document.body.getAttribute('data-theme');
+  const next = themes[(themes.indexOf(current)+1) % themes.length];
+  setTheme(next);
+}
+
+// =======================================================================
+// State + flow
+// =======================================================================
+const state = { step:0, name:'', wish:'', obstacle:'', hobby:'', trigger1:'', action1:'', trigger2:'', action2:'', trigger3:'', action3:'', anchorName:'', anchorDate:'', _fromDemo:false };
+function setToday(){document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-GB',{weekday:'long',month:'long',day:'numeric'});}
+setToday();
+function setInput(id,val){document.getElementById(id).value = val;}
+function captureCurrentStep() {
+  ['name','wish','obstacle','hobby'].forEach(k=>{const el=document.getElementById('input-'+k); if(el && el.value!==undefined) state[k]=el.value;});
+  for(let i=1;i<=3;i++){const t=document.getElementById('input-trigger-'+i); if(t && t.value!==undefined) state['trigger'+i]=t.value; const a=document.getElementById('input-action-'+i); if(a && a.value!==undefined) state['action'+i]=a.value;}
+  const an=document.getElementById('input-anchor-name'); if(an && an.value!==undefined) state.anchorName=an.value;
+  const ad=document.getElementById('input-anchor-date'); if(ad && ad.value!==undefined) state.anchorDate=ad.value;
+}
+function goToStep(n) {
+  captureCurrentStep();
+  state._fromDemo = false;
+  document.getElementById('screen-landing').style.display = 'none';
+  document.getElementById('manifesto').style.display = 'none';
+  document.getElementById('flow').style.display = 'block';
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+  state.step = n;
+  renderJourneyBar();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function restart() {
+  Object.keys(state).forEach(k => { if (typeof state[k] === 'string') state[k] = ''; });
+  state.step = 0; state._fromDemo = false;
+  document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+  document.getElementById('flow').style.display = 'none';
+  document.getElementById('manifesto').style.display = 'none';
+  document.getElementById('screen-landing').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// =======================================================================
+// JOURNEY RENDERING
+// =======================================================================
+function renderJourneyOverview() {
+  const el = document.getElementById('journey-overview');
+  el.innerHTML = JOURNEY.map(j => `
+    <div class="journey-row" onclick="goToStep(${j.num})">
+      <div class="journey-num">${j.num}</div>
+      <div class="journey-content">
+        <div class="journey-model">${j.model}</div>
+        <div class="journey-action"><em>${j.action}</em></div>
+      </div>
+      <div class="journey-time">${j.time}</div>
+    </div>
+  `).join('');
+}
+renderJourneyOverview();
+
+function renderJourneyBar() {
+  const el = document.getElementById('journey-bar');
+  el.innerHTML = JOURNEY.map(j => {
+    let cls = '';
+    if (j.num < state.step) cls = 'done';
+    if (j.num === state.step) cls = 'active';
+    return `<div class="journey-seg ${cls}" onclick="goToStep(${j.num})">
+      <div class="seg-num">${j.num}</div>
+      <div class="seg-label">${j.model}</div>
+    </div>`;
+  }).join('');
+}
+
+// =======================================================================
+// CLIPBOARD / TOAST
+// =======================================================================
+function copySpar(step) {
+  const prompt = SPAR_PROMPTS[step];
+  if (!prompt) return;
+  navigator.clipboard.writeText(prompt).then(() => {
+    showToast('✓ Sparring prompt copied. Paste into Claude, ChatGPT, or any chat.');
+  }).catch(() => {
+    showToast('Copy failed. Try again or select manually.');
+  });
+}
+let toastTimer = null;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.innerHTML = msg;
+  el.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+// =======================================================================
+// DEMO DATA
+// =======================================================================
+const DEMO_DATA = {
+  name: 'The summer of saying yes',
+  wish: "I'm telling Sara about the boat day with the Berlin friends, the night swim in the Aare, the morning I biked to work and got there before 8 just because I wanted to. None of it was planned three months ago. All of it happened because I said yes.",
+  obstacle: "I get home tired and default to the couch by 8pm",
+  hobby: "playing guitar",
+  trigger1: "it's Wednesday and the workday ends",
+  action1: "text two friends and propose dinner outside, no matter the weather",
+  trigger2: "it's a sunny Saturday morning",
+  action2: "be on my bike by 9, with a destination, no exceptions",
+  trigger3: "it rains on a weekend",
+  action3: "go to the bookshop on Spalenberg, not Netflix",
+  anchorName: "Train to Lisbon with Sara",
+  anchorDate: (() => { const d=new Date(); d.setDate(d.getDate()+22); return d.toISOString().split('T')[0]; })(),
+};
+function loadDemo() {
+  Object.keys(DEMO_DATA).forEach(k => { state[k] = DEMO_DATA[k]; });
+  state._fromDemo = true;
+  generateManifesto({fromDemo: true});
+}
+
+// =======================================================================
+// PICTOGRAM REGISTRY
+// =======================================================================
+const PICTOGRAMS = {
+  swim: { name:'Swim', svg:`<circle class="shape-c" cx="68" cy="9" r="4"/><circle class="ornament-dot" cx="62" cy="4" r="0.9"/><circle class="ornament-dot" cx="74" cy="4" r="0.9"/><circle class="ornament-dot" cx="76" cy="13" r="0.9"/><rect class="shape-a" x="22" y="19" width="22" height="6" rx="3"/><circle class="shape-a" cx="46" cy="22" r="4"/><rect class="shape-a" x="50" y="20" width="7" height="3" rx="1.5"/><path class="stroke-b" d="M 4 32 Q 10 27 16 32 T 28 32 T 40 32 T 52 32 T 64 32 T 76 32" stroke-width="2.6"/>`},
+  hike: { name:'Hike', svg:`<circle class="shape-c" cx="68" cy="9" r="4"/><polygon class="shape-b" points="48,12 64,32 32,32"/><polygon class="shape-a" points="22,6 42,32 2,32"/><path class="ornament" d="M 16 13 L 22 6 L 27 13"/><circle class="ornament-dot" cx="50" cy="36" r="1"/><circle class="ornament-dot" cx="58" cy="37" r="1"/><circle class="ornament-dot" cx="66" cy="36" r="1"/>`},
+  cookout: { name:'Cookout', svg:`<path class="shape-c" d="M 30 16 C 28 11 30 7 34 4 C 36 9 40 12 38 18 C 36 21 32 21 30 16 Z"/><path class="shape-b" d="M 22 18 C 20 15 22 11 26 9 C 28 14 30 16 26 20 C 24 21 22 20 22 18 Z"/><rect class="shape-a" x="8" y="22" width="46" height="7" rx="2"/><line class="stroke-a" x1="14" y1="29" x2="14" y2="36" stroke-width="2.6"/><line class="stroke-a" x1="48" y1="29" x2="48" y2="36" stroke-width="2.6"/><circle class="ornament-dot" cx="62" cy="14" r="1.4"/><circle class="ornament-dot" cx="68" cy="10" r="1.4"/><circle class="ornament-dot" cx="72" cy="16" r="1.4"/>`},
+  ride: { name:'Ride', svg:`<circle class="stroke-a" cx="18" cy="28" r="8" stroke-width="3"/><circle class="stroke-a" cx="58" cy="28" r="8" stroke-width="3"/><polygon class="shape-b" points="20,28 38,12 56,28"/><circle class="shape-c" cx="38" cy="9" r="3"/><line class="ornament" x1="4" y1="22" x2="9" y2="22"/><line class="ornament" x1="2" y1="28" x2="7" y2="28"/>`},
+  read: { name:'Read', svg:`<path class="shape-a" d="M 8 10 L 38 11 L 38 32 L 8 31 Z"/><path class="shape-b" d="M 42 11 L 72 10 L 72 31 L 42 32 Z"/><line class="ornament" x1="40" y1="10" x2="40" y2="32" stroke-width="1.5"/><line class="ornament" x1="14" y1="17" x2="32" y2="17"/><line class="ornament" x1="14" y1="21" x2="28" y2="21"/><line class="ornament" x1="14" y1="25" x2="32" y2="25"/><line class="ornament" x1="46" y1="17" x2="64" y2="17"/><line class="ornament" x1="46" y1="21" x2="68" y2="21"/><line class="ornament" x1="46" y1="25" x2="62" y2="25"/><circle class="shape-c" cx="40" cy="5" r="2.2"/>`},
+  listen: { name:'Listen', svg:`<path class="stroke-a" d="M 14 22 C 14 6 60 6 60 22" stroke-width="3.5"/><rect class="shape-b" x="8" y="20" width="11" height="13" rx="3"/><rect class="shape-b" x="55" y="20" width="11" height="13" rx="3"/><path class="ornament" d="M 70 16 Q 73 22 70 28"/><path class="ornament" d="M 74 12 Q 79 22 74 32"/><circle class="shape-c" cx="37" cy="9" r="2.2"/>`},
+  travel: { name:'Travel', svg:`<polygon class="shape-a" points="4,30 62,8 62,22"/><polygon class="shape-b" points="4,30 36,20 62,22"/><line class="ornament" x1="2" y1="36" x2="8" y2="36"/><line class="ornament" x1="12" y1="36" x2="18" y2="36"/><line class="ornament" x1="22" y1="36" x2="28" y2="36"/><circle class="shape-c" cx="72" cy="9" r="3.5"/>`},
+  gather: { name:'Gather', svg:`<path class="shape-a" d="M 8 12 L 18 12 L 16 26 L 10 26 Z"/><line class="stroke-a" x1="13" y1="26" x2="13" y2="33" stroke-width="2"/><line class="stroke-a" x1="9" y1="34" x2="17" y2="34" stroke-width="2"/><path class="shape-b" d="M 30 12 L 40 12 L 38 26 L 32 26 Z"/><line class="stroke-b" x1="35" y1="26" x2="35" y2="33" stroke-width="2"/><line class="stroke-b" x1="31" y1="34" x2="39" y2="34" stroke-width="2"/><path class="shape-c" d="M 52 12 L 62 12 L 60 26 L 54 26 Z"/><line class="stroke-c" x1="57" y1="26" x2="57" y2="33" stroke-width="2"/><line class="stroke-c" x1="53" y1="34" x2="61" y2="34" stroke-width="2"/><line class="ornament" x1="10" y1="15" x2="16" y2="15"/><line class="ornament" x1="32" y1="15" x2="38" y2="15"/><line class="ornament" x1="54" y1="15" x2="60" y2="15"/><line class="ornament" x1="22" y1="6" x2="26" y2="9"/><line class="ornament" x1="44" y1="6" x2="48" y2="9"/><line class="ornament" x1="66" y1="6" x2="70" y2="9"/>`},
+  make: { name:'Make', svg:`<rect class="shape-b" x="6" y="18" width="34" height="4" rx="2"/><rect class="shape-c" x="40" y="14" width="5" height="12"/><polygon class="shape-a" points="45,10 62,6 62,34 45,30"/><circle class="shape-c" cx="70" cy="32" r="3.5"/><circle class="ornament-dot" cx="76" cy="34" r="1.2"/><circle class="ornament-dot" cx="66" cy="37" r="1.2"/><circle class="ornament-dot" cx="74" cy="28" r="1"/>`},
+  watch: { name:'Watch', svg:`<rect class="shape-a" x="8" y="8" width="64" height="22" rx="3"/><rect class="shape-b" x="12" y="12" width="56" height="14" rx="1.5"/><polygon class="shape-c" points="36,15 36,23 46,19"/><line class="ornament-line" x1="30" y1="34" x2="50" y2="34" stroke-width="2.4"/><line class="ornament-line" x1="36" y1="30" x2="36" y2="34"/><line class="ornament-line" x1="44" y1="30" x2="44" y2="34"/>`},
+  rest: { name:'Rest', svg:`<line class="stroke-a" x1="8" y1="6" x2="8" y2="34" stroke-width="3"/><line class="stroke-a" x1="72" y1="6" x2="72" y2="34" stroke-width="3"/><path class="stroke-b" d="M 8 14 Q 40 36 72 14" stroke-width="3"/><ellipse class="shape-c" cx="40" cy="24" rx="12" ry="3"/><circle class="ornament-dot" cx="22" cy="10" r="1"/><circle class="ornament-dot" cx="26" cy="7" r="1"/><circle class="ornament-dot" cx="30" cy="10" r="1"/><circle class="shape-c" cx="56" cy="8" r="2.5"/>`},
+  sport: { name:'Sport', svg:`<circle class="shape-a" cx="32" cy="9" r="4"/><path class="shape-a" d="M 28 13 L 36 13 L 38 26 L 30 26 Z"/><line class="stroke-b" x1="33" y1="16" x2="42" y2="22" stroke-width="3"/><line class="stroke-b" x1="31" y1="18" x2="22" y2="14" stroke-width="3"/><line class="stroke-c" x1="35" y1="26" x2="42" y2="36" stroke-width="3"/><line class="stroke-c" x1="30" y1="26" x2="22" y2="34" stroke-width="3"/><line class="ornament" x1="6" y1="14" x2="14" y2="14"/><line class="ornament" x1="8" y1="22" x2="18" y2="22"/><line class="ornament" x1="6" y1="30" x2="14" y2="30"/>`}
+};
+function renderPicto(id, opts={}) {const p=PICTOGRAMS[id]; if(!p) return ''; return `<svg class="picto" width="${opts.width||110}" height="${opts.height||55}" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">${p.svg}</svg>`;}
+function guessPictogramId(text) {
+  const t=(text||'').toLowerCase();
+  if(/swim|pool|lake|river|beach|sea|ocean|water|aare|night swim/.test(t)) return 'swim';
+  if(/hike|walk|trail|mountain|climb|peak|forest/.test(t)) return 'hike';
+  if(/cook|barbecue|bbq|grill|dinner|picnic|eat|food|fire/.test(t)) return 'cookout';
+  if(/bike|cycle|ride|bicycle|skateboard|skate|scooter/.test(t)) return 'ride';
+  if(/read|book|library|bookshop|novel/.test(t)) return 'read';
+  if(/music|playlist|spotify|listen|concert|gig|dj|podcast/.test(t)) return 'listen';
+  if(/travel|trip|train|flight|fly|drive to|lisbon|paris|berlin|rome|airport/.test(t)) return 'travel';
+  if(/friend|gather|hang|meet|invite|people|text|party|drinks/.test(t)) return 'gather';
+  if(/build|make|craft|guitar|piano|chess|paint|draw|write|knit/.test(t)) return 'make';
+  if(/movie|film|cinema|show|watch|netflix|series|tv/.test(t)) return 'watch';
+  if(/run|gym|tennis|sport|boulder|workout|jog|football/.test(t)) return 'sport';
+  if(/rest|sleep|nap|relax|hammock|chill/.test(t)) return 'rest';
+  return 'gather';
+}
+
+// =======================================================================
+// PREVIEWS
+// =======================================================================
+function renderPreviews() {
+  document.getElementById('preview-a').innerHTML = previewSwim('a');
+  document.getElementById('preview-c').innerHTML = previewSwim('c');
+  document.getElementById('preview-d').innerHTML = previewSwim('d');
+}
+function previewSwim(theme) {
+  const tc={a:{a:'#0b4f9c',b:'#ffd84d',c:'#ed3142'},c:{a:'#ff4d8d',b:'#00b8d4',c:'#ffc233'},d:{a:'#1f4e3c',b:'#2c7a8c',c:'#c25a3d'}};
+  const col=tc[theme];
+  return `<svg width="100" height="44" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle fill="${col.c}" cx="68" cy="9" r="4"/><circle fill="#1a1814" cx="62" cy="4" r="0.9"/><circle fill="#1a1814" cx="74" cy="4" r="0.9"/><rect fill="${col.a}" x="22" y="19" width="22" height="6" rx="3"/><circle fill="${col.a}" cx="46" cy="22" r="4"/><rect fill="${col.a}" x="50" y="20" width="7" height="3" rx="1.5"/><path stroke="${col.b}" stroke-width="2.6" fill="none" stroke-linecap="round" d="M 4 32 Q 10 27 16 32 T 28 32 T 40 32 T 52 32 T 64 32 T 76 32"/></svg>`;
+}
+renderPreviews();
+function renderManifestoPreview() {
+  document.getElementById('preview-hero-pict').innerHTML = renderPicto('travel',{width:120,height:60});
+  document.getElementById('prev-row-1').innerHTML = renderPicto('gather',{width:64,height:32});
+  document.getElementById('prev-row-2').innerHTML = renderPicto('ride',{width:64,height:32});
+  document.getElementById('prev-row-3').innerHTML = renderPicto('read',{width:64,height:32});
+}
+renderManifestoPreview();
+
+// =======================================================================
+// MANIFESTO
+// =======================================================================
+function generateManifesto(opts={}) {
+  if(!opts.fromDemo) captureCurrentStep();
+  state._fromDemo = opts.fromDemo || false;
+  const summerName=state.name||'The summer of intent';
+  const cleanName=summerName.replace(/^the summer of\s+/i,'');
+  const themeNames={a:'Mediterranean Noon',c:'Tropical Pop',d:'Lake & Pine'};
+  const currentTheme=document.body.getAttribute('data-theme');
+
+  let countdownHTML='';
+  if(state.anchorDate) {
+    const today=new Date(); const target=new Date(state.anchorDate);
+    const days=Math.ceil((target-today)/(1000*60*60*24));
+    if(days>=0) {
+      const formatted=target.toLocaleDateString('en-GB',{day:'numeric',month:'long'});
+      countdownHTML=`<div class="section-block"><div class="section-label">The anchor</div><div class="anchor"><div><div class="countdown">${days}<span class="countdown-small">days until</span></div></div><div class="what-anchor">${state.anchorName||'—'}<div class="anchor-date">${formatted}</div></div></div></div>`;
+    }
+  }
+
+  const plans=[{trigger:state.trigger1,action:state.action1},{trigger:state.trigger2,action:state.action2},{trigger:state.trigger3,action:state.action3}].filter(p=>p.trigger||p.action);
+  const planRows=plans.map(p=>{const pid=guessPictogramId(p.action); return `<div class="plan-row"><div class="pict-wrap">${renderPicto(pid,{width:96,height:48})}</div><div><div class="when">when ${p.trigger||'—'}</div><div class="what">I will ${p.action||'—'}</div></div></div>`;}).join('');
+
+  let heroPictHTML='';
+  if(plans.length||state.anchorName) {
+    const sourceText=state.anchorName||plans[0]?.action||'gather';
+    const pid=guessPictogramId(sourceText);
+    heroPictHTML=`<div class="hero-pict">${renderPicto(pid,{width:140,height:70})}</div>`;
+  }
+
+  const todayFmt=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  const demoBanner=state._fromDemo?`<div class="demo-banner"><span class="badge">Example</span>This is a sample summer. Make yours →</div>`:'';
+  document.getElementById('demo-banner-wrap').innerHTML=demoBanner;
+
+  document.getElementById('manifesto-render').innerHTML=`
+    <div class="manifesto-cover">
+      ${heroPictHTML}
+      <div class="top-row"><span>Filed: ${todayFmt}</span><span>A manifesto · Edition 1</span></div>
+      <div class="theme-tag"><span class="tag-dot"></span>${themeNames[currentTheme]}</div>
+      <h1 class="serif">The summer<br>of <span class="heat">${cleanName}.</span></h1>
+      <p class="subtitle">${state.wish||'A summer worth telling a friend about.'}</p>
+    </div>
+    <div class="manifesto-body">
+      ${plans.length?`<div class="section-block"><div class="section-label">The plans · if · then</div>${planRows}</div>`:''}
+      ${countdownHTML}
+      ${state.hobby?`<div class="section-block"><div class="section-label">The hobby · quits 21 Sept</div><p class="hobby-quote">I'm getting back into <strong>${state.hobby}</strong>. Until the equinox. Then I stop.</p></div>`:''}
+      ${state.obstacle?`<div class="section-block"><div class="obstacle-card"><div class="obstacle-label">When the obstacle hits — and it will</div><div class="obstacle-text">The thing most likely to derail this: <strong>${state.obstacle}</strong>. Naming it is half the work. You have an if-then for that.</div></div></div>`:''}
+      ${plans.length?`<div class="section-block"><div class="section-label">The shape of it</div><div class="pictogram-strip">${plans.map(p=>{const pid=guessPictogramId(p.action); return `<div class="item">${renderPicto(pid,{width:110,height:55})}<div class="item-name">${PICTOGRAMS[pid].name}</div></div>`;}).join('')}</div></div>`:''}
+    </div>
+    <div class="manifesto-footer"><span>Name your summer</span><span>${themeNames[currentTheme]}</span></div>
+  `;
+  document.getElementById('screen-landing').style.display='none';
+  document.getElementById('flow').style.display='none';
+  document.getElementById('manifesto').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Keyboard shortcut: cmd/ctrl + D = load demo
+document.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'd') { e.preventDefault(); loadDemo(); }
+});
+</script>
+
+</body>
+</html>
